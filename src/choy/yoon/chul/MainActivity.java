@@ -6,6 +6,8 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.MotionEvent;
+import android.view.TouchDelegate;
 import android.widget.Toast;
 
 public class MainActivity extends Activity implements ColorPickerDialog.OnColorChangedListener {
@@ -15,6 +17,7 @@ public class MainActivity extends Activity implements ColorPickerDialog.OnColorC
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		PaintStateManager.GetInstance().SetContext(this);
 		paintView = new PaintView(this);
 		setContentView(paintView);
 	}
@@ -29,9 +32,16 @@ public class MainActivity extends Activity implements ColorPickerDialog.OnColorC
 
 	public void onDraw(MenuItem item) {
 		Log.d("id", Integer.toString(item.getItemId()));
-		
-		Toast.makeText(this, "Selected Item: " + item.getTitle(),
-				Toast.LENGTH_SHORT).show();
+		//Toast.makeText(this, "Selected Item: " + item.getTitle(), Toast.LENGTH_SHORT).show();
+		PaintStateManager.GetInstance().OnDraw(item);
+	}
+
+	@Override
+	public boolean onTouchEvent(MotionEvent event) {
+		// TODO Auto-generated method stub
+		super.onTouchEvent(event);
+		PaintStateManager.GetInstance().OnTouch(event);
+		return true;
 	}
 
 	public void onFill(MenuItem item) {
