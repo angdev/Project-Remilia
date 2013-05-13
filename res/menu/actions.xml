@@ -3,47 +3,47 @@
 
     <item
         android:id="@+id/action_draw"
-        android:title="Draw">
+        android:title="@string/menu_draw">
         <menu>
             <item
                 android:id="@+id/action_dot"
                 android:onClick="onDraw"
-                android:title="Dot"/>
+                android:title="@string/menu_draw_dot"/>
             <item
                 android:id="@+id/action_line"
                 android:onClick="onDraw"
-                android:title="Line"/>
+                android:title="@string/menu_draw_line"/>
             <item
                 android:id="@+id/action_polyline"
                 android:onClick="onDraw"
-                android:title="Polyline"/>
+                android:title="@string/menu_draw_polyline"/>
             <item
                 android:id="@+id/action_circle"
                 android:onClick="onDraw"
-                android:title="Circle"/>
+                android:title="@string/menu_draw_circle"/>
             <item
                 android:id="@+id/action_ellipse"
                 android:onClick="onDraw"
-                android:title="Ellipse"/>
+                android:title="@string/menu_draw_ellipse"/>
             <item
                 android:id="@+id/action_polygon"
                 android:onClick="onDraw"
-                android:title="Polygon"/>
+                android:title="@string/menu_draw_polygon"/>
         </menu>
     </item>
     <item
         android:id="@+id/action_fill"
-        android:title="Fill">
+        android:title="@string/menu_fill">
         <menu>
             <item
                 android:id="@+id/action_color"
                 android:onClick="onFill"
-                android:title="Color"/>
+                android:title="@string/menu_fill_color"/>
         </menu>
     </item>
     <item
         android:id="@+id/action_edit"
         android:onClick="onEdit"
-        android:title="Edit"/>
+        android:title="@string/menu_edit"/>
 
 </menu>
