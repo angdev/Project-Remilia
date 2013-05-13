@@ -23,11 +23,6 @@ public class MainActivity extends Activity {
         
         return true;
     }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        return true;
-    }
     
     public void onDraw(MenuItem item) {
         Toast.makeText(this, "Selected Item: " + item.getTitle(), Toast.LENGTH_SHORT).show();

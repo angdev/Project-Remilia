@@ -2,15 +2,15 @@
 <resources>
 
     <string name="app_name">CG_HW2</string>
-    <string name="menu_draw">DRAW</string>
+    <string name="menu_draw">Draw</string>
     <string name="menu_draw_dot">Dot</string>
     <string name="menu_draw_line">Line</string>
     <string name="menu_draw_polyline">Polyline</string>
     <string name="menu_draw_circle">Circle</string>
     <string name="menu_draw_ellipse">Ellipse</string>
     <string name="menu_draw_polygon">Polygon</string>
-    <string name="menu_fill">FILL</string>
+    <string name="menu_fill">Fill</string>
     <string name="menu_fill_color">Color</string>
-    <string name="menu_edit">EDIT</string>
+    <string name="menu_edit">Edit</string>
 
 </resources>
