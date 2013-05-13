@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <item
+        android:id="@+id/action_draw"
+        android:title="Draw">
+        <menu>
+            <item
+                android:id="@+id/action_dot"
+                android:onClick="onDraw"
+                android:title="Dot"/>
+            <item
+                android:id="@+id/action_line"
+                android:onClick="onDraw"
+                android:title="Line"/>
+            <item
+                android:id="@+id/action_polyline"
+                android:onClick="onDraw"
+                android:title="Polyline"/>
+            <item
+                android:id="@+id/action_circle"
+                android:onClick="onDraw"
+                android:title="Circle"/>
+            <item
+                android:id="@+id/action_ellipse"
+                android:onClick="onDraw"
+                android:title="Ellipse"/>
+            <item
+                android:id="@+id/action_polygon"
+                android:onClick="onDraw"
+                android:title="Polygon"/>
+        </menu>
+    </item>
+    <item
+        android:id="@+id/action_fill"
+        android:title="Fill">
+        <menu>
+            <item
+                android:id="@+id/action_color"
+                android:onClick="onFill"
+                android:title="Color"/>
+        </menu>
+    </item>
+    <item
+        android:id="@+id/action_edit"
+        android:onClick="onEdit"
+        android:title="Edit"/>
+
+</menu>
