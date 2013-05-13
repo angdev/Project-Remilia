@@ -33,14 +33,8 @@
     </item>
     <item
         android:id="@+id/action_fill"
-        android:title="@string/menu_fill">
-        <menu>
-            <item
-                android:id="@+id/action_color"
-                android:onClick="onFill"
-                android:title="@string/menu_fill_color"/>
-        </menu>
-    </item>
+        android:onClick="onFill"
+        android:title="@string/menu_fill"/>
     <item
         android:id="@+id/action_edit"
         android:onClick="onEdit"

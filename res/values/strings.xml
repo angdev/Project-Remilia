@@ -10,7 +10,6 @@
     <string name="menu_draw_ellipse">Ellipse</string>
     <string name="menu_draw_polygon">Polygon</string>
     <string name="menu_fill">Fill</string>
-    <string name="menu_fill_color">Color</string>
     <string name="menu_edit">Edit</string>
 
 </resources>
