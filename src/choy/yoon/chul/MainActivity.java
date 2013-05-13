@@ -9,11 +9,14 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 public class MainActivity extends Activity implements ColorPickerDialog.OnColorChangedListener {
-	int selectedColor;
-
+	private int selectedColor;
+	private PaintView paintView;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		paintView = new PaintView(this);
+		setContentView(paintView);
 	}
 
 	@Override
