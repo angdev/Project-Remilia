@@ -1,14 +1,13 @@
 package choy.yoon.chul;
 
+import android.content.Context;
+import android.view.MenuItem;
+import android.view.MotionEvent;
 import choy.yoon.chul.Shape.ShapeType;
 import choy.yoon.chul.State.DrawState;
 import choy.yoon.chul.State.EditState;
 import choy.yoon.chul.State.IState;
 import choy.yoon.chul.State.InitState;
-import android.content.Context;
-import android.view.MenuItem;
-import android.view.MotionEvent;
-import android.widget.Toast;
 
 public class PaintStateManager {
 	

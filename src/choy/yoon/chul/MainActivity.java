@@ -7,7 +7,6 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.MotionEvent;
-import android.view.TouchDelegate;
 import android.widget.Toast;
 
 public class MainActivity extends Activity implements ColorPickerDialog.OnColorChangedListener {
@@ -31,29 +30,40 @@ public class MainActivity extends Activity implements ColorPickerDialog.OnColorC
 	}
 
 	public void onDraw(MenuItem item) {
-		Log.d("id", Integer.toString(item.getItemId()));
-		//Toast.makeText(this, "Selected Item: " + item.getTitle(), Toast.LENGTH_SHORT).show();
 		PaintStateManager.GetInstance().OnDraw(item);
 	}
 
 	@Override
 	public boolean onTouchEvent(MotionEvent event) {
-		// TODO Auto-generated method stub
 		super.onTouchEvent(event);
 		PaintStateManager.GetInstance().OnTouch(event);
 		return true;
 	}
 
-	public void onFill(MenuItem item) {
-		Toast.makeText(this, "Selected Item: " + item.getTitle(),
-				Toast.LENGTH_SHORT).show();
-
-		new ColorPickerDialog(this, this, selectedColor).show();
+	public void onEdit(MenuItem item) {
+		switch(item.getItemId()) {
+		case R.id.action_edit_transform:
+			Toast.makeText(this, "Transform", Toast.LENGTH_SHORT).show();
+			break;
+		case R.id.action_edit_scale:
+			Toast.makeText(this, "Scale", Toast.LENGTH_SHORT).show();
+			break;
+		case R.id.action_edit_rotate:
+			Toast.makeText(this, "Rotate", Toast.LENGTH_SHORT).show();
+			break;
+		}
 	}
 
-	public void onEdit(MenuItem item) {
-		Toast.makeText(this, "Selected Item: " + item.getTitle(),
-				Toast.LENGTH_SHORT).show();
+	public void onFill(MenuItem item) {
+		switch(item.getItemId()) {
+		case R.id.action_fill_color:
+			Toast.makeText(this, "Color", Toast.LENGTH_SHORT).show();
+			new ColorPickerDialog(this, this, selectedColor).show();
+			break;
+		case R.id.action_fill_texture:
+			Toast.makeText(this, "Texture", Toast.LENGTH_SHORT).show();
+			break;
+		}
 	}
 
 	@Override

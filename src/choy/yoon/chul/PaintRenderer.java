@@ -3,10 +3,8 @@ package choy.yoon.chul;
 import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.opengles.GL10;
 
-import choy.yoon.chul.Shape.DrawableShapeList;
-
 import android.opengl.GLSurfaceView.Renderer;
-import android.view.Display;
+import choy.yoon.chul.Shape.DrawableShapeList;
 
 public class PaintRenderer implements Renderer {
 	

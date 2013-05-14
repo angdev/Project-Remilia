@@ -32,12 +32,36 @@
         </menu>
     </item>
     <item
-        android:id="@+id/action_fill"
-        android:onClick="onFill"
-        android:title="@string/menu_fill"/>
-    <item
         android:id="@+id/action_edit"
-        android:onClick="onEdit"
-        android:title="@string/menu_edit"/>
+        android:title="@string/menu_edit">
+        <menu>
+            <item
+                android:id="@+id/action_edit_transform"
+                android:onClick="onEdit"
+                android:title="@string/menu_edit_transform"/>
+            <item
+                android:id="@+id/action_edit_scale"
+                android:onClick="onEdit"
+                android:title="@string/menu_edit_scale"/>
+            <item
+                android:id="@+id/action_edit_rotate"
+                android:onClick="onEdit"
+                android:title="@string/menu_edit_rotate"/>
+            <item
+                android:id="@+id/action_edit_fill"
+                android:title="@string/menu_fill">
+                <menu>
+                    <item
+                        android:id="@+id/action_fill_color"
+                        android:onClick="onFill"
+                        android:title="@string/menu_fill_color"/>
+                    <item
+                        android:id="@+id/action_fill_texture"
+                        android:onClick="onFill"
+                        android:title="@string/menu_fill_texture"/>
+                </menu>
+            </item>
+        </menu>
+    </item>
 
 </menu>
