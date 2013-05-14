@@ -26,11 +26,11 @@ import android.graphics.RectF;
 import android.graphics.Shader;
 import android.graphics.SweepGradient;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 
 public class ColorPickerDialog extends Dialog {
-
 	public interface OnColorChangedListener {
 		void colorChanged(int color);
 	}
@@ -54,7 +54,7 @@ public class ColorPickerDialog extends Dialog {
 			mPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
 			mPaint.setShader(s);
 			mPaint.setStyle(Paint.Style.STROKE);
-			mPaint.setStrokeWidth(40);
+			mPaint.setStrokeWidth(50);
 
 			mCenterPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
 			mCenterPaint.setColor(color);
@@ -66,7 +66,7 @@ public class ColorPickerDialog extends Dialog {
 
 		@Override
 		protected void onDraw(Canvas canvas) {
-			float r = 120.0f;
+			float r = 150.0f;
 
 			canvas.translate(CENTER_X, CENTER_Y);
 
@@ -94,13 +94,13 @@ public class ColorPickerDialog extends Dialog {
 
 		@Override
 		protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-			CENTER_X = (widthMeasureSpec - 0x40000000) / 2;
+			CENTER_X = (widthMeasureSpec - View.MeasureSpec.EXACTLY) / 2;
 			setMeasuredDimension(CENTER_X * 2, CENTER_Y * 2);
 		}
 
 		private static int CENTER_X = 200;
 		private static int CENTER_Y = 200;
-		private static final int CENTER_RADIUS = 32;
+		private static final int CENTER_RADIUS = 40;
 
 		private int floatToByte(float x) {
 			int n = java.lang.Math.round(x);
@@ -205,12 +205,15 @@ public class ColorPickerDialog extends Dialog {
 				if (mTrackingCenter) {
 					if (inCenter) {
 						mListener.colorChanged(mCenterPaint.getColor());
+						
+						Log.d("color", Integer.toHexString(mCenterPaint.getColor()));
 					}
 					mTrackingCenter = false; // so we draw w/o halo
 					invalidate();
 				}
 				break;
 			}
+			
 			return true;
 		}
 	}
