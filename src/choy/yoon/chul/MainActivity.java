@@ -1,5 +1,6 @@
 package choy.yoon.chul;
 
+import choy.yoon.chul.State.PaintStateManager;
 import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;

@@ -4,22 +4,17 @@ import java.util.ArrayList;
 
 import javax.microedition.khronos.opengles.GL10;
 
+import android.graphics.Point;
 import android.graphics.Rect;
 
 public abstract class Shape {
 	
 	//float[][3] 형식을 지킬 것.
 	protected ArrayList<float[]> vertices_;
-	protected Rect bound_;
 	protected boolean visible_;
 	
 	public Shape() {
 		vertices_ = new ArrayList<float[]>();
-		bound_ = new Rect();
-		bound_.left = Integer.MAX_VALUE;
-		bound_.right = Integer.MIN_VALUE;
-		bound_.bottom = Integer.MIN_VALUE;
-		bound_.top = Integer.MAX_VALUE;
 		visible_ = true;
 	}
 	
@@ -41,24 +36,15 @@ public abstract class Shape {
 		return including;
 	}
 	
+	public void SetVisible(boolean visible) {
+		visible_ = visible;
+	}
+	
 	public boolean IsVisiable() {
 		return visible_;
 	}
 	
-	public Rect GetBound() {
-		return bound_;
-	}
-	
-	private void refreshBound() {
-		for(float[] v : vertices_) {
-			if(bound_.left > v[0])
-				bound_.left = (int)v[0];
-			if(bound_.right < v[0])
-				bound_.right = (int)v[0];
-			if(bound_.top > v[1])
-				bound_.top = (int)v[1];
-			if(bound_.bottom < v[1])
-				bound_.bottom = (int)v[1];
-		}
+	public ArrayList<float[]> GetVertices() {
+		return vertices_;
 	}
 }

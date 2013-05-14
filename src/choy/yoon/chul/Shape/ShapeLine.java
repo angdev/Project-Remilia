@@ -30,14 +30,18 @@ public class ShapeLine extends DrawableShape {
 	
 	@Override
 	public void Draw(GL10 gl) {
+		if(!IsVisiable()) {
+			return;
+		}
+		
 		gl.glEnableClientState(GL10.GL_VERTEX_ARRAY);
 		gl.glLineWidth(5);
-		gl.glColor4f(0, 1, 0, 1);
+		gl.glColor4f(1, 1, 1, 1);
 		gl.glVertexPointer(3, GL10.GL_FLOAT, 0, GLESHelper.ArrayToBuffer(vertices_.toArray(new float[][]{})));
 		gl.glDrawArrays(GL10.GL_LINES, 0, 2);
 		gl.glDisableClientState(GL10.GL_VERTEX_ARRAY);
 	}
-
+	
 	@Override
 	public ShapeEnumType GetType() {
 		return type_;

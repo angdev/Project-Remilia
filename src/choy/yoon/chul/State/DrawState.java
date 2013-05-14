@@ -1,17 +1,17 @@
 package choy.yoon.chul.State;
 
-import choy.yoon.chul.PaintStateManager;
-import choy.yoon.chul.PaintStateManager.StateType;
+import choy.yoon.chul.Shape.DrawableShape;
 import choy.yoon.chul.Shape.DrawableShapeList;
 import choy.yoon.chul.Shape.Shape;
 import choy.yoon.chul.Shape.ShapeEnumType;
 import choy.yoon.chul.Shape.ShapeLine;
 import choy.yoon.chul.Shape.ShapeType;
+import choy.yoon.chul.State.PaintStateManager.StateType;
 import android.view.MotionEvent;
 
 public class DrawState implements IState {
 	private ShapeType shapeType_;
-	private Shape currentShape_;
+	private DrawableShape currentShape_;
 	
 	public DrawState() {
 		

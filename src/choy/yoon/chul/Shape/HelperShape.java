@@ -1,16 +1,16 @@
 package choy.yoon.chul.Shape;
 
-import java.util.ArrayList;
-
 import javax.microedition.khronos.opengles.GL10;
 
+import android.graphics.Rect;
 import choy.yoon.chul.GLESHelper;
 
-public class HelperShape {
+public class HelperShape extends Shape {
 	//rect
 	private float[][] vertices_;
 	
 	public HelperShape() {
+		//rt -> lt -> lb -> rb
 		vertices_ = new float[8][3];
 		for(int i=0; i<vertices_.length; ++i) {
 			for(int j=0; j<vertices_[i].length; ++j) {
@@ -19,7 +19,13 @@ public class HelperShape {
 		}
 	}
 	
+	
+	@Override
 	public void Draw(GL10 gl) {
+		if(!IsVisiable()) {
+			return;
+		}
+		
 		gl.glEnableClientState(GL10.GL_VERTEX_ARRAY);
 		gl.glLineWidth(5);
 		gl.glColor4f(0, 1, 0, 1);
@@ -27,5 +33,10 @@ public class HelperShape {
 		gl.glDrawArrays(GL10.GL_LINES, 0, 8);
 		gl.glDisableClientState(GL10.GL_VERTEX_ARRAY);
 	
+	}
+
+	@Override
+	public ShapeEnumType GetType() {
+		return ShapeEnumType.kShapeHelper;
 	}
 }
