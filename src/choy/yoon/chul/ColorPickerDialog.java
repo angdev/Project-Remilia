@@ -26,11 +26,11 @@ import android.graphics.RectF;
 import android.graphics.Shader;
 import android.graphics.SweepGradient;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 
 public class ColorPickerDialog extends Dialog {
-
 	public interface OnColorChangedListener {
 		void colorChanged(int color);
 	}
@@ -54,7 +54,7 @@ public class ColorPickerDialog extends Dialog {
 			mPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
 			mPaint.setShader(s);
 			mPaint.setStyle(Paint.Style.STROKE);
-			mPaint.setStrokeWidth(40);
+			mPaint.setStrokeWidth(100);
 
 			mCenterPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
 			mCenterPaint.setColor(color);
@@ -66,7 +66,7 @@ public class ColorPickerDialog extends Dialog {
 
 		@Override
 		protected void onDraw(Canvas canvas) {
-			float r = 120.0f;
+			float r = 200.0f;
 
 			canvas.translate(CENTER_X, CENTER_Y);
 
@@ -94,13 +94,13 @@ public class ColorPickerDialog extends Dialog {
 
 		@Override
 		protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-			CENTER_X = (widthMeasureSpec - 0x40000000) / 2;
+			CENTER_X = (widthMeasureSpec - View.MeasureSpec.EXACTLY) / 2;
 			setMeasuredDimension(CENTER_X * 2, CENTER_Y * 2);
 		}
 
-		private static int CENTER_X = 200;
-		private static int CENTER_Y = 200;
-		private static final int CENTER_RADIUS = 32;
+		private static int CENTER_X = 300;
+		private static int CENTER_Y = 300;
+		private static final int CENTER_RADIUS = 60;
 
 		private int floatToByte(float x) {
 			int n = java.lang.Math.round(x);
@@ -197,7 +197,16 @@ public class ColorPickerDialog extends Dialog {
 					if (unit < 0) {
 						unit += 1;
 					}
-					mCenterPaint.setColor(interpColor(mColors, unit));
+					int brightness = ((java.lang.Math.sqrt(x * x + y * y) / CENTER_X) < 1 ? (int)((java.lang.Math.sqrt(x * x + y * y) / CENTER_X) * 0xFF * 2) : 0xFF * 2) - 0xFF;
+					int color = interpColor(mColors, unit);
+					int red = Integer.parseInt(Integer.toHexString(color).substring(2, 4), 16);
+					int green = Integer.parseInt(Integer.toHexString(color).substring(4, 6), 16);
+					int blue = Integer.parseInt(Integer.toHexString(color).substring(6, 8), 16);
+					red = (red + brightness) > 0xff ? 0xff : (red + brightness) < 0 ? 0x00 : (red + brightness);
+					green = (green + brightness) > 0xff ? 0xff : (green + brightness) < 0 ? 0x00 : (green + brightness);
+					blue = (blue + brightness) > 0xff ? 0xff : (blue + brightness) < 0 ? 0x00 : (blue + brightness);
+					color = Color.argb(0xff, red, green, blue);
+					mCenterPaint.setColor(color);
 					invalidate();
 				}
 				break;
@@ -211,6 +220,7 @@ public class ColorPickerDialog extends Dialog {
 				}
 				break;
 			}
+			
 			return true;
 		}
 	}
