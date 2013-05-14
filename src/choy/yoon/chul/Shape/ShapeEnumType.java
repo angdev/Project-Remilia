@@ -1,4 +1,4 @@
-package choy.yoon.chul;
+package choy.yoon.chul.Shape;
 
 public enum ShapeEnumType {
 	kShapeNull,

@@ -1,4 +1,7 @@
-package choy.yoon.chul;
+package choy.yoon.chul.Shape;
+
+import choy.yoon.chul.R;
+import choy.yoon.chul.R.id;
 
 public class ShapeType {
 

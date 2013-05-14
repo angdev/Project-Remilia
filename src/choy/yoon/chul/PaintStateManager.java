@@ -1,5 +1,10 @@
 package choy.yoon.chul;
 
+import choy.yoon.chul.Shape.ShapeType;
+import choy.yoon.chul.State.DrawState;
+import choy.yoon.chul.State.EditState;
+import choy.yoon.chul.State.IState;
+import choy.yoon.chul.State.InitState;
 import android.content.Context;
 import android.view.MenuItem;
 import android.view.MotionEvent;
@@ -10,17 +15,20 @@ public class PaintStateManager {
 	public enum StateType {
 		kStateInit,
 		kStateDraw,
+		kStateEdit,
 	}
 	
 	private static PaintStateManager instance_ = null;
 	private IState state_;
 	private InitState initState_;
 	private DrawState drawState_;
+	private EditState editState_;
 	private Context context_;
 	
 	private PaintStateManager() {
 		initState_ = new InitState();
 		drawState_ = new DrawState();
+		editState_ = new EditState();
 		state_ = initState_;
 	}
 	
