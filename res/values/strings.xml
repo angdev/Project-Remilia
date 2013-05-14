@@ -9,7 +9,12 @@
     <string name="menu_draw_circle">Circle</string>
     <string name="menu_draw_ellipse">Ellipse</string>
     <string name="menu_draw_polygon">Polygon</string>
-    <string name="menu_fill">Fill</string>
     <string name="menu_edit">Edit</string>
+    <string name="menu_edit_transform">Transform</string>
+    <string name="menu_edit_scale">Scale</string>
+    <string name="menu_edit_rotate">Rotate</string>
+    <string name="menu_fill">Fill</string>
+    <string name="menu_fill_color">Color</string>
+    <string name="menu_fill_texture">Texture</string>
 
 </resources>
