@@ -42,6 +42,7 @@ public class MainActivity extends Activity implements ColorPickerDialog.OnColorC
 	}
 
 	public void onEdit(MenuItem item) {
+		/*
 		switch(item.getItemId()) {
 		case R.id.action_edit_transform:
 			Toast.makeText(this, "Transform", Toast.LENGTH_SHORT).show();
@@ -53,6 +54,8 @@ public class MainActivity extends Activity implements ColorPickerDialog.OnColorC
 			Toast.makeText(this, "Rotate", Toast.LENGTH_SHORT).show();
 			break;
 		}
+		*/
+		PaintStateManager.GetInstance().OnEdit(item);
 	}
 
 	public void onFill(MenuItem item) {

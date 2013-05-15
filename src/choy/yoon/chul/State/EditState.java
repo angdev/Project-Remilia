@@ -1,65 +1,54 @@
 package choy.yoon.chul.State;
 
-import java.util.ArrayList;
-
-import javax.microedition.khronos.opengles.GL10;
-
 import android.view.MotionEvent;
-import choy.yoon.chul.Shape.DrawableShape;
+import choy.yoon.chul.Shape.DrawableShapeList;
+import choy.yoon.chul.Shape.Shape;
+import choy.yoon.chul.Shape.ShapeEditor;
+import choy.yoon.chul.State.PaintStateManager.StateType;
 
 public class EditState implements IState {
 
-	enum EditType {
-		kEditTransform,
-		kEditScale,
-		kEditRotate,
-	};
-	private DrawableShape shape_;
-	private EditType editType_;
-	private float[] selectedVertex_;
+	private Shape shape_;
+	private EditEnumType editType_;
+	private ShapeEditor shapeEditor_;
 
 	public EditState() {
-		editType_ = EditType.kEditTransform;
+		editType_ = EditEnumType.kEditFreeTransform;
 		shape_ = null;
-		selectedVertex_ = null;
+		shapeEditor_ = new ShapeEditor();
+		DrawableShapeList.getInstance().SetShapeEditor(shapeEditor_);
+	}
+	
+	void SetEditType(EditEnumType type) {
+		editType_ = type;
+		if(shapeEditor_ != null) {
+			shapeEditor_.SetEditType(type);
+		}
 	}
 
 	@Override
 	public void onTouch(MotionEvent event) {
 		// TODO Auto-generated method stub
 		if(shape_ != null) {
-			if(editType_ == EditType.kEditTransform) {
-				switch(event.getAction()) {
-				case MotionEvent.ACTION_DOWN:
-					selectedVertex_ = shape_.GetNearVertex(event.getX(), event.getY());
-					break;
-				case MotionEvent.ACTION_MOVE:
-					if(selectedVertex_ != null) {
-						selectedVertex_[0] = event.getX();
-						selectedVertex_[1] = event.getY();
-					}
-					break;
-				case MotionEvent.ACTION_UP:
-					selectedVertex_ = null;
-					break;
+			switch(event.getAction()) {
+			case MotionEvent.ACTION_DOWN:
+				if(!shapeEditor_.SelectVertex(event.getX(), event.getY())) {
+					shapeEditor_.SetShape(null);
+					PaintStateManager.GetInstance().SetState(StateType.kStateInit);
+					PaintStateManager.GetInstance().GetState(StateType.kStateInit).onTouch(event);
 				}
+				break;
+			case MotionEvent.ACTION_MOVE:
+				shapeEditor_.MoveVertex(event.getX(), event.getY());
+				break;
+			case MotionEvent.ACTION_UP:
+				shapeEditor_.DeselectVertex();
 			}
 		}
 	}
 
-	public void SetShape(DrawableShape shape) {
+	public void SetShape(Shape shape) {
 		shape_ = shape;
+		shapeEditor_.SetShape(shape);
 	}
-
-	public void DrawEditHelper(GL10 gl) {
-		if(shape_ != null) {
-			if(editType_ == EditType.kEditTransform) {
-				ArrayList<float[]> vertices = shape_.GetVertices();
-				for(float[] vertex : vertices) {
-					
-				}
-			}
-		}
-	}
-	
 }

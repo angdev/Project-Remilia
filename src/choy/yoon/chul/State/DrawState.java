@@ -1,6 +1,6 @@
 package choy.yoon.chul.State;
 
-import choy.yoon.chul.Shape.DrawableShape;
+import choy.yoon.chul.Shape.Shape;
 import choy.yoon.chul.Shape.DrawableShapeList;
 import choy.yoon.chul.Shape.Shape;
 import choy.yoon.chul.Shape.ShapeEnumType;
@@ -11,7 +11,7 @@ import android.view.MotionEvent;
 
 public class DrawState implements IState {
 	private ShapeType shapeType_;
-	private DrawableShape currentShape_;
+	private Shape currentShape_;
 	
 	public DrawState() {
 		
@@ -36,6 +36,7 @@ public class DrawState implements IState {
 		}
 	}
 	
+	//ShapeType ¹ö¸°´Ù ¤±¤¤¤·¤©
 	public void SetShape(ShapeType type) {
 		shapeType_ = type;
 		

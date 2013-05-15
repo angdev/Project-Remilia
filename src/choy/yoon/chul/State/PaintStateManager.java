@@ -1,5 +1,7 @@
 package choy.yoon.chul.State;
 
+import choy.yoon.chul.R;
+import choy.yoon.chul.Shape.ShapeEnumType;
 import choy.yoon.chul.Shape.ShapeType;
 import android.content.Context;
 import android.view.MenuItem;
@@ -72,6 +74,20 @@ public class PaintStateManager {
 	public void OnDraw(MenuItem item) {
 		drawState_.SetShape(new ShapeType(item.getItemId()));
 		state_ = drawState_;
+	}
+	
+	public void OnEdit(MenuItem item) {
+		switch(item.getItemId()) {
+		case R.id.action_edit_scale:
+			editState_.SetEditType(EditEnumType.kEditScale);
+			break;
+		case R.id.action_edit_rotate:
+			editState_.SetEditType(EditEnumType.kEditScale);
+			break;
+		case R.id.action_edit_transform:
+			editState_.SetEditType(EditEnumType.kEditFreeTransform);
+			break;
+		}
 	}
 	
 	public void OnTouch(MotionEvent event) {

@@ -8,7 +8,7 @@ import choy.yoon.chul.GLESHelper;
 
 import android.util.Log;
 
-public class ShapeLine extends DrawableShape {
+public class ShapeLine extends Shape {
 
 	private static ShapeEnumType type_ = ShapeEnumType.kShapeLine;
 	
@@ -26,6 +26,7 @@ public class ShapeLine extends DrawableShape {
 	public void SetEndPoint(float x, float y) {
 		vertices_.get(1)[0] = x;
 		vertices_.get(1)[1] = y;
+		refreshBound();
 	}
 	
 	@Override

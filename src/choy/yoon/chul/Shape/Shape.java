@@ -12,10 +12,12 @@ public abstract class Shape {
 	//float[][3] 형식을 지킬 것.
 	protected ArrayList<float[]> vertices_;
 	protected boolean visible_;
+	protected Rect bound_;
 	
 	public Shape() {
 		vertices_ = new ArrayList<float[]>();
 		visible_ = true;
+		bound_ = new Rect();
 	}
 	
 	abstract public void Draw(GL10 gl);
@@ -46,5 +48,51 @@ public abstract class Shape {
 	
 	public ArrayList<float[]> GetVertices() {
 		return vertices_;
+	}
+	
+	public Rect GetBound() {
+		return bound_;
+	}
+	
+	protected void refreshBound() {
+		float left = Float.MAX_VALUE, right = Float.MIN_VALUE,
+				top = Float.MAX_VALUE, bottom = Float.MIN_VALUE;
+		for(float[] v : vertices_) {
+			if(left > v[0]) {
+				left = v[0];
+			}
+			if(right < v[0]) {
+				right = v[0];
+			}
+			if(top > v[1]) {
+				top = v[1];
+			}
+			if(bottom < v[1]) {
+				bottom = v[1];
+			}
+		}
+		bound_.left = (int)left;
+		bound_.right = (int)right;
+		bound_.top = (int)top;
+		bound_.bottom = (int)bottom;
+	}
+	
+	public float[] GetNearVertex(float x, float y) {
+		float vx, vy;
+		double minLength = Double.MAX_VALUE;
+		double length;
+		float[] vertex = null;
+		for(int i=0; i<vertices_.size(); ++i) {
+			vx = vertices_.get(i)[0];
+			vy = vertices_.get(i)[1];
+			length = (vx-x)*(vx-x) + (vy-y)*(vy-y);
+			if(length < 5000.0f) {
+				if(length < minLength) {
+					minLength = length;
+					vertex = vertices_.get(i);
+				}
+			}
+		}
+		return vertex;
 	}
 }
