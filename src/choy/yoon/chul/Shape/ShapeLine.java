@@ -26,7 +26,7 @@ public class ShapeLine extends Shape {
 	public void SetEndPoint(float x, float y) {
 		vertices_.get(1)[0] = x;
 		vertices_.get(1)[1] = y;
-		refreshBound();
+		RefreshBound();
 	}
 	
 	@Override
