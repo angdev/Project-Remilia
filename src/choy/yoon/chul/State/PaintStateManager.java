@@ -87,6 +87,9 @@ public class PaintStateManager {
 		case R.id.action_edit_transform:
 			editState_.SetEditType(EditEnumType.kEditFreeTransform);
 			break;
+		case R.id.action_edit_translate:
+			editState_.SetEditType(EditEnumType.kEditTranslate);
+			break;
 		}
 	}
 	

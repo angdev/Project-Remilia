@@ -96,12 +96,15 @@ public class ShapeEditor {
 			float angleOld = (float)Math.atan2(selectedVertex_[1] - center[1], selectedVertex_[0] - center[0]);
 			MathHelper.RotateVertices(shape_.GetVertices(), angle - angleOld, center[0], center[1]);
 			MathHelper.RotateVertices(bound_.GetVertices(), angle - angleOld, center[0], center[1]);
-			//º¸Á¤
 			break;
 		case kEditTranslate:
 			if(selectedVertex_ == null) {
 				return;
 			}
+			float dx = (x - selectedVertex_[0]);
+			float dy = (y - selectedVertex_[1]);
+			MathHelper.TranslateVertices(shape_.GetVertices(), dx, dy);
+			MathHelper.TranslateVertices(bound_.GetVertices(), dx, dy);
 			break;
 		}
 	}

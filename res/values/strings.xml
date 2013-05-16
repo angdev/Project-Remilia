@@ -13,8 +13,10 @@
     <string name="menu_edit_transform">Transform</string>
     <string name="menu_edit_scale">Scale</string>
     <string name="menu_edit_rotate">Rotate</string>
+    <string name="menu_edit_translate">Translate</string>
     <string name="menu_fill">Fill</string>
     <string name="menu_fill_color">Color</string>
     <string name="menu_fill_texture">Texture</string>
+    
 
 </resources>

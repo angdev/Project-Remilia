@@ -48,6 +48,10 @@
                 android:onClick="onEdit"
                 android:title="@string/menu_edit_rotate"/>
             <item
+                android:id="@+id/action_edit_translate"
+                android:onClick="onEdit"
+                android:title="@string/menu_edit_translate"/>
+            <item
                 android:id="@+id/action_edit_fill"
                 android:title="@string/menu_fill">
                 <menu>
