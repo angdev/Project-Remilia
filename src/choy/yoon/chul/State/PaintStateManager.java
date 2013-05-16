@@ -82,7 +82,7 @@ public class PaintStateManager {
 			editState_.SetEditType(EditEnumType.kEditScale);
 			break;
 		case R.id.action_edit_rotate:
-			editState_.SetEditType(EditEnumType.kEditScale);
+			editState_.SetEditType(EditEnumType.kEditRotate);
 			break;
 		case R.id.action_edit_transform:
 			editState_.SetEditType(EditEnumType.kEditFreeTransform);

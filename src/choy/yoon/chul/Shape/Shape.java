@@ -12,12 +12,10 @@ public abstract class Shape {
 	//float[][3] 형식을 지킬 것.
 	protected ArrayList<float[]> vertices_;
 	protected boolean visible_;
-	protected BoundRect bound_;
 	
 	public Shape() {
 		vertices_ = new ArrayList<float[]>();
 		visible_ = true;
-		bound_ = new BoundRect();
 	}
 	
 	abstract public void Draw(GL10 gl);
@@ -50,11 +48,7 @@ public abstract class Shape {
 		return vertices_;
 	}
 	
-	public BoundRect GetBound() {
-		return bound_;
-	}
-	
-	public void RefreshBound() {
+	public Rect GetRect() {
 		float left = Float.MAX_VALUE, right = Float.MIN_VALUE,
 				top = Float.MAX_VALUE, bottom = Float.MIN_VALUE;
 		for(float[] v : vertices_) {
@@ -76,7 +70,7 @@ public abstract class Shape {
 		r.right = (int)right;
 		r.top = (int)top;
 		r.bottom = (int)bottom;
-		bound_.SetRect(r);
+		return r;
 	}
 	
 	public float[] GetNearVertex(float x, float y) {

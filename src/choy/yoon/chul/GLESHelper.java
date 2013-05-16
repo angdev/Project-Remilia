@@ -35,6 +35,20 @@ public class GLESHelper {
 		return ArrayToBuffer(points.toArray(new float[][]{}));
 	}
 	
+	public static FloatBuffer PolygonBufferFromVertices(float[][] vertices) {
+		if(vertices.length < 2) {
+			return null;
+		}
+		ArrayList<float[]> points = new ArrayList<float[]>();
+		points.add(vertices[0]);
+		for(int i=1; i<vertices.length; ++i) {
+			points.add(vertices[i]);
+			points.add(vertices[i]);
+		}
+		points.add(vertices[0]);
+		return ArrayToBuffer(points.toArray(new float[][]{}));
+	}
+	
 	public static ArrayList<float[]> GetRectVerticesFromPoint(float x, float y) {
 		ArrayList<float[]> arr = new ArrayList<float[]>();
 		arr.add(new float[]{ x-10, y-10, 0 });
@@ -61,6 +75,16 @@ public class GLESHelper {
 		gl.glVertexPointer(3, GL10.GL_FLOAT, 0,
 				PolygonBufferFromVertices(vertices));
 		gl.glDrawArrays(GL10.GL_LINES, 0, vertices.size() * 2);
+		gl.glDisableClientState(GL10.GL_VERTEX_ARRAY);
+	}
+	
+	public static void DrawPolygon(GL10 gl, float[][] vertices) {
+		gl.glEnableClientState(GL10.GL_VERTEX_ARRAY);
+		gl.glColor4f(0, 1, 0, 1);
+		gl.glLineWidthx(1);
+		gl.glVertexPointer(3, GL10.GL_FLOAT, 0,
+				PolygonBufferFromVertices(vertices));
+		gl.glDrawArrays(GL10.GL_LINES, 0, vertices.length * 2);
 		gl.glDisableClientState(GL10.GL_VERTEX_ARRAY);
 	}
 	
