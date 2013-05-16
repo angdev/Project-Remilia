@@ -42,19 +42,6 @@ public class MainActivity extends Activity implements ColorPickerDialog.OnColorC
 	}
 
 	public void onEdit(MenuItem item) {
-		/*
-		switch(item.getItemId()) {
-		case R.id.action_edit_transform:
-			Toast.makeText(this, "Transform", Toast.LENGTH_SHORT).show();
-			break;
-		case R.id.action_edit_scale:
-			Toast.makeText(this, "Scale", Toast.LENGTH_SHORT).show();
-			break;
-		case R.id.action_edit_rotate:
-			Toast.makeText(this, "Rotate", Toast.LENGTH_SHORT).show();
-			break;
-		}
-		*/
 		PaintStateManager.GetInstance().OnEdit(item);
 	}
 

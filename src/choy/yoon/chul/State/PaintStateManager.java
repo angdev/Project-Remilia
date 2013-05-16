@@ -1,12 +1,10 @@
 package choy.yoon.chul.State;
 
-import choy.yoon.chul.R;
-import choy.yoon.chul.Shape.ShapeEnumType;
-import choy.yoon.chul.Shape.ShapeType;
 import android.content.Context;
 import android.view.MenuItem;
 import android.view.MotionEvent;
-import android.widget.Toast;
+import choy.yoon.chul.R;
+import choy.yoon.chul.Shape.ShapeEnumType;
 
 public class PaintStateManager {
 	
@@ -72,7 +70,19 @@ public class PaintStateManager {
 	}
 	
 	public void OnDraw(MenuItem item) {
-		drawState_.SetShape(new ShapeType(item.getItemId()));
+		ShapeEnumType type;
+		switch(item.getItemId()) {
+		case R.id.action_line:
+			type = ShapeEnumType.kShapeLine;
+			break;
+		case R.id.action_dot:
+			type = ShapeEnumType.kShapeDot;
+			break;
+		default:
+			type = ShapeEnumType.kShapeNull;
+			break;
+		}
+		drawState_.SetShape(type);
 		state_ = drawState_;
 	}
 	

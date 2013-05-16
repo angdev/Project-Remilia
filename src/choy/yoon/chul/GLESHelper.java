@@ -61,6 +61,7 @@ public class GLESHelper {
 	public static void DrawPoint(GL10 gl, float x, float y) {
 		gl.glEnableClientState(GL10.GL_VERTEX_ARRAY);
 		gl.glColor4f(1, 1, 1, 1);
+		gl.glLineWidthx(1);
 		gl.glVertexPointer(3, GL10.GL_FLOAT, 0,
 				PolygonBufferFromVertices(GetRectVerticesFromPoint(x, y)));
 		gl.glDrawArrays(GL10.GL_LINES, 0, 8);

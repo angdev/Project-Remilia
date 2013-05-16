@@ -1,16 +1,14 @@
 package choy.yoon.chul.State;
 
-import choy.yoon.chul.Shape.Shape;
+import android.view.MotionEvent;
 import choy.yoon.chul.Shape.DrawableShapeList;
 import choy.yoon.chul.Shape.Shape;
 import choy.yoon.chul.Shape.ShapeEnumType;
 import choy.yoon.chul.Shape.ShapeLine;
-import choy.yoon.chul.Shape.ShapeType;
 import choy.yoon.chul.State.PaintStateManager.StateType;
-import android.view.MotionEvent;
 
 public class DrawState implements IState {
-	private ShapeType shapeType_;
+	private ShapeEnumType shapeType_;
 	private Shape currentShape_;
 	
 	public DrawState() {
@@ -37,11 +35,11 @@ public class DrawState implements IState {
 	}
 	
 	//ShapeType 버린다 ㅁㄴㅇㄹ
-	public void SetShape(ShapeType type) {
+	public void SetShape(ShapeEnumType type) {
 		shapeType_ = type;
 		
 		//factory?
-		if(type.GetType() == ShapeEnumType.kShapeLine) {
+		if(type == ShapeEnumType.kShapeLine) {
 			currentShape_ = new ShapeLine();
 			//리스트에 추가
 			DrawableShapeList.getInstance().AddShape(currentShape_);
