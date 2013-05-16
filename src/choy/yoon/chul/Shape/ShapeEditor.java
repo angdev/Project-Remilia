@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import javax.microedition.khronos.opengles.GL10;
 
-import android.graphics.Rect;
 import choy.yoon.chul.GLESHelper;
 import choy.yoon.chul.MathHelper;
 import choy.yoon.chul.State.EditEnumType;
@@ -60,13 +59,14 @@ public class ShapeEditor {
 	public void MoveVertex(float x, float y) {
 		switch(editType_) {
 		case kEditFreeTransform:
-			if(selectedVertex_ != null) {
-				selectedVertex_[0] = x;
-				selectedVertex_[1] = y;
+			if(selectedVertex_ == null || !shape_.IsFreeTransformable()) {
+				return;
 			}
+			selectedVertex_[0] = x;
+			selectedVertex_[1] = y;
 			break;
 		case kEditScale:
-			if(selectedVertex_ == null) {
+			if(selectedVertex_ == null || !shape_.IsScalable()) {
 				return;
 			}
 			float scaleX = (x - selectedVertexCounter_[0]) / (selectedVertexOld_[0] - selectedVertexCounter_[0]);
@@ -88,7 +88,7 @@ public class ShapeEditor {
 			}
 			break;
 		case kEditRotate:
-			if(selectedVertex_ == null) {
+			if(selectedVertex_ == null || !shape_.IsRotatable()) {
 				return;
 			}			
 			float[] center = bound_.GetCenter();

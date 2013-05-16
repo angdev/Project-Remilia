@@ -3,12 +3,12 @@ package choy.yoon.chul.State;
 import android.view.MotionEvent;
 import choy.yoon.chul.Shape.DrawableShapeList;
 import choy.yoon.chul.Shape.Shape;
+import choy.yoon.chul.Shape.ShapeDot;
 import choy.yoon.chul.Shape.ShapeEnumType;
 import choy.yoon.chul.Shape.ShapeLine;
 import choy.yoon.chul.State.PaintStateManager.StateType;
 
 public class DrawState implements IState {
-	private ShapeEnumType shapeType_;
 	private Shape currentShape_;
 	
 	public DrawState() {
@@ -17,6 +17,9 @@ public class DrawState implements IState {
 
 	@Override
 	public void onTouch(MotionEvent event) {
+		if(currentShape_ == null) {
+			return;
+		}
 		if(currentShape_.GetType() == ShapeEnumType.kShapeLine) {
 			switch(event.getAction()) {
 			case MotionEvent.ACTION_DOWN:
@@ -32,17 +35,36 @@ public class DrawState implements IState {
 				break;
 			}
 		}
+		else if(currentShape_.GetType() == ShapeEnumType.kShapeDot) {
+			ShapeDot dot = (ShapeDot)currentShape_;
+			switch(event.getAction()) {
+			case MotionEvent.ACTION_DOWN:
+				dot.SetPosition(event.getX(), event.getY());
+				break;
+			case MotionEvent.ACTION_MOVE:
+				
+				dot.SetPosition(event.getX(), event.getY());
+				break;
+			case MotionEvent.ACTION_UP:
+				currentShape_ = null;
+				PaintStateManager.GetInstance().SetState(StateType.kStateInit);
+				break;
+			}
+		}
 	}
 	
-	//ShapeType 버린다 ㅁㄴㅇㄹ
 	public void SetShape(ShapeEnumType type) {
-		shapeType_ = type;
-		
-		//factory?
-		if(type == ShapeEnumType.kShapeLine) {
+		switch(type) {
+		case kShapeLine:
 			currentShape_ = new ShapeLine();
-			//리스트에 추가
-			DrawableShapeList.getInstance().AddShape(currentShape_);
+			break;
+		case kShapeDot:
+			currentShape_ = new ShapeDot();
+			break;
+		default:
+			break;
 		}
+		//리스트에 추가
+		DrawableShapeList.getInstance().AddShape(currentShape_);	
 	}
 }

@@ -9,21 +9,23 @@ import choy.yoon.chul.State.PaintStateManager.StateType;
 public class EditState implements IState {
 
 	private Shape shape_;
-	private EditEnumType editType_;
 	private ShapeEditor shapeEditor_;
 
 	public EditState() {
-		editType_ = EditEnumType.kEditFreeTransform;
 		shape_ = null;
 		shapeEditor_ = new ShapeEditor();
 		DrawableShapeList.getInstance().SetShapeEditor(shapeEditor_);
 	}
 	
 	void SetEditType(EditEnumType type) {
-		editType_ = type;
 		if(shapeEditor_ != null) {
 			shapeEditor_.SetEditType(type);
 		}
+	}
+	
+	public void SetShape(Shape shape) {
+		shape_ = shape;
+		shapeEditor_.SetShape(shape);
 	}
 
 	@Override
@@ -45,10 +47,5 @@ public class EditState implements IState {
 				shapeEditor_.DeselectVertex();
 			}
 		}
-	}
-
-	public void SetShape(Shape shape) {
-		shape_ = shape;
-		shapeEditor_.SetShape(shape);
 	}
 }

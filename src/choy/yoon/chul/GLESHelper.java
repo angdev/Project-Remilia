@@ -49,12 +49,12 @@ public class GLESHelper {
 		return ArrayToBuffer(points.toArray(new float[][]{}));
 	}
 	
-	public static ArrayList<float[]> GetRectVerticesFromPoint(float x, float y) {
+	public static ArrayList<float[]> GetRectVerticesFromPoint(float x, float y, float size) {
 		ArrayList<float[]> arr = new ArrayList<float[]>();
-		arr.add(new float[]{ x-10, y-10, 0 });
-		arr.add(new float[]{ x-10, y+10, 0 });
-		arr.add(new float[]{ x+10, y+10, 0 });
-		arr.add(new float[]{ x+10, y-10, 0 });
+		arr.add(new float[]{ x-size, y-size, 0 });
+		arr.add(new float[]{ x-size, y+size, 0 });
+		arr.add(new float[]{ x+size, y+size, 0 });
+		arr.add(new float[]{ x+size, y-size, 0 });
 		return arr;
 	}
 	
@@ -63,7 +63,7 @@ public class GLESHelper {
 		gl.glColor4f(1, 1, 1, 1);
 		gl.glLineWidthx(1);
 		gl.glVertexPointer(3, GL10.GL_FLOAT, 0,
-				PolygonBufferFromVertices(GetRectVerticesFromPoint(x, y)));
+				PolygonBufferFromVertices(GetRectVerticesFromPoint(x, y, 10)));
 		gl.glDrawArrays(GL10.GL_LINES, 0, 8);
 		gl.glDisableClientState(GL10.GL_VERTEX_ARRAY);
 	}

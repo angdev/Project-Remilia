@@ -4,24 +4,26 @@ import java.util.ArrayList;
 
 import javax.microedition.khronos.opengles.GL10;
 
-import android.graphics.Point;
 import android.graphics.Rect;
 
 public abstract class Shape {
 	
 	//float[][3] 형식을 지킬 것.
 	protected ArrayList<float[]> vertices_;
-	protected boolean visible_;
 	
 	public Shape() {
 		vertices_ = new ArrayList<float[]>();
-		visible_ = true;
 	}
 	
 	abstract public void Draw(GL10 gl);
 	abstract public ShapeEnumType GetType();
+	abstract public boolean IsFreeTransformable();
+	abstract public boolean IsScalable();
+	abstract public boolean IsRotatable();
 	
-	public boolean IsIncludingPoint(float x, float y) {
+	
+	//점을 포함하는지 검사한다. 기본적으로는 닫힌 도형 베이스라 열린 도형의 경우에는 오버라이딩을 하자.
+	public boolean IsSelected(float x, float y) {
 		boolean including = false;
 		float xi, yi, xj, yj;
 		for(int i=0, j = vertices_.size()-1; i<vertices_.size(); ++i) {
@@ -35,15 +37,6 @@ public abstract class Shape {
 		}
 		return including;
 	}
-	
-	public void SetVisible(boolean visible) {
-		visible_ = visible;
-	}
-	
-	public boolean IsVisiable() {
-		return visible_;
-	}
-	
 	public ArrayList<float[]> GetVertices() {
 		return vertices_;
 	}

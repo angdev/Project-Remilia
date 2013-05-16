@@ -1,12 +1,9 @@
 package choy.yoon.chul.Shape;
 
-import java.util.ArrayList;
-
 import javax.microedition.khronos.opengles.GL10;
 
-import choy.yoon.chul.GLESHelper;
-
 import android.util.Log;
+import choy.yoon.chul.GLESHelper;
 
 public class ShapeLine extends Shape {
 
@@ -29,8 +26,20 @@ public class ShapeLine extends Shape {
 	}
 	
 	@Override
+	public boolean IsSelected(float x, float y) {
+		//직선거리
+		for(float[] v : vertices_) {
+			Log.d("", ""+((v[0] - x) * (v[0] - x) + (v[1] - y) * (v[1] - y)));
+			if((v[0] - x) * (v[0] - x) + (v[1] - y) * (v[1] - y) < 5000) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	@Override
 	public void Draw(GL10 gl) {
-		if(!IsVisiable()) {
+		if(vertices_ == null) {
 			return;
 		}
 		
@@ -45,5 +54,20 @@ public class ShapeLine extends Shape {
 	@Override
 	public ShapeEnumType GetType() {
 		return type_;
+	}
+
+	@Override
+	public boolean IsScalable() {
+		return true;
+	}
+
+	@Override
+	public boolean IsRotatable() {
+		return true;
+	}
+
+	@Override
+	public boolean IsFreeTransformable() {
+		return true;
 	}
 }

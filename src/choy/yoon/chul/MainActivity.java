@@ -1,14 +1,13 @@
 package choy.yoon.chul;
 
-import choy.yoon.chul.State.PaintStateManager;
 import android.app.Activity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.widget.Toast;
+import choy.yoon.chul.State.PaintStateManager;
 
 public class MainActivity extends Activity implements ColorPickerDialog.OnColorChangedListener {
 	private int selectedColor;

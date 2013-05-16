@@ -2,7 +2,6 @@ package choy.yoon.chul;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.Iterator;
 
 public class MathHelper {
 	
