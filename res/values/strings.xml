@@ -6,7 +6,7 @@
     <string name="menu_draw_dot">Dot</string>
     <string name="menu_draw_line">Line</string>
     <string name="menu_draw_polyline">Polyline</string>
-    <string name="menu_draw_circle">Circle</string>
+    <string name="menu_draw_rectangle">Rectangle</string>
     <string name="menu_draw_ellipse">Ellipse</string>
     <string name="menu_draw_polygon">Polygon</string>
     <string name="menu_edit">Edit</string>
