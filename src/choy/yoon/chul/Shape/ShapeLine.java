@@ -41,7 +41,7 @@ public class ShapeLine extends Shape {
 	public void Draw(GL10 gl) {
 		gl.glEnableClientState(GL10.GL_VERTEX_ARRAY);
 		gl.glLineWidth(5);
-		gl.glColor4f(1, 1, 1, 1);
+		gl.glColor4f(color_[1], color_[2], color_[3], color_[0]);
 		gl.glVertexPointer(3, GL10.GL_FLOAT, 0, GLESHelper.ArrayToBuffer(vertices_.toArray(new float[][]{})));
 		gl.glDrawArrays(GL10.GL_LINES, 0, 2);
 		gl.glDisableClientState(GL10.GL_VERTEX_ARRAY);

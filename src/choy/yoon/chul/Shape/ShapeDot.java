@@ -38,7 +38,7 @@ public class ShapeDot extends Shape {
 	@Override
 	public void Draw(GL10 gl) {
 		gl.glEnableClientState(GL10.GL_VERTEX_ARRAY);
-		gl.glColor4f(1, 1, 1, 1);
+		gl.glColor4f(color_[1], color_[2], color_[3], color_[0]);
 		gl.glVertexPointer(3, GL10.GL_FLOAT, 0, GLESHelper.ArrayToBuffer(
 				GLESHelper.GetRectVerticesFromPoint(vertices_.get(0)[0], vertices_.get(0)[1], size_).toArray(new float[][]{})));
 		gl.glDrawArrays(GL10.GL_TRIANGLE_FAN, 0, 4);

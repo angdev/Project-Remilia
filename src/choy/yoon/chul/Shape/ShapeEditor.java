@@ -139,10 +139,13 @@ public class ShapeEditor {
 		switch(editType_) {
 		case kEditFreeTransform:
 			//아 이거 그리는거 빼야하는데 ㅁㄴㅇㄹ
+			gl.glPushMatrix();
+			gl.glColor4f(0, 1, 0, 1);
 			ArrayList<float[]> vertices = shape_.GetVertices();
 			for(float[] v : vertices) {
 				GLESHelper.DrawPoint(gl, v[0], v[1]);
 			}
+			gl.glPopMatrix();
 			break;
 		case kEditRotate:
 		case kEditScale:

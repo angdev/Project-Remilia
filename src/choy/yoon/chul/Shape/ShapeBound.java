@@ -76,10 +76,13 @@ public class ShapeBound extends Shape {
 
 	@Override
 	public void Draw(GL10 gl) {
+		gl.glPushMatrix();
+		gl.glColor4f(0, 1, 0, 1);
 		GLESHelper.DrawPolygon(gl, vertices_);
 		for(float[] v : vertices_) {
 			GLESHelper.DrawPoint(gl, v[0], v[1]);
 		}
+		gl.glPopMatrix();
 	}
 
 	@Override

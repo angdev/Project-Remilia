@@ -48,7 +48,6 @@ public class GLESHelper {
 	
 	public static void DrawPoint(GL10 gl, float x, float y) {
 		gl.glEnableClientState(GL10.GL_VERTEX_ARRAY);
-		gl.glColor4f(1, 1, 0, 1);
 		gl.glLineWidthx(1);
 		gl.glVertexPointer(3, GL10.GL_FLOAT, 0,
 				PolygonBufferFromVertices(GetRectVerticesFromPoint(x, y, 10)));
@@ -62,7 +61,6 @@ public class GLESHelper {
 			return;
 		}
 		gl.glEnableClientState(GL10.GL_VERTEX_ARRAY);
-		gl.glColor4f(0, 1, 0, 1);
 		gl.glLineWidthx(1);
 		gl.glVertexPointer(3, GL10.GL_FLOAT, 0,
 				PolygonBufferFromVertices(vertices));
@@ -85,7 +83,6 @@ public class GLESHelper {
 		}
 
 		gl.glEnableClientState(GL10.GL_VERTEX_ARRAY);
-		gl.glColor4f(0, 1, 0, 1);
 		gl.glLineWidthx(1);
 		gl.glVertexPointer(3, GL10.GL_FLOAT, 0,
 				ArrayToBuffer(points.toArray(new float[][]{})));
@@ -101,5 +98,14 @@ public class GLESHelper {
 		arr.add(new float[]{ r.right, r.bottom, 0 });
 		arr.add(new float[]{ r.right, r.top, 0 });
 		DrawPolygon(gl, arr);
+	}
+	
+	public static float[] GetARGB(int color) {
+		float[] argb = new float[4];
+		argb[0] = (color >>> 24) / (float)0xFF;
+		argb[1] = ((color << 8) >>> 24) / (float)0xFF;
+		argb[2] = ((color << 16) >>> 24) / (float)0xFF;
+		argb[3] = ((color << 24) >>> 24) / (float)0xFF;
+		return argb;
 	}
 }

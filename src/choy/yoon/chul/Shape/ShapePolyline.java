@@ -46,6 +46,9 @@ public class ShapePolyline extends Shape {
 	
 	@Override
 	public void Draw(GL10 gl) {
+
+		gl.glPushMatrix();
+		gl.glColor4f(color_[1], color_[2], color_[3], color_[0]);
 		GLESHelper.DrawOpenPolygon(gl, vertices_);
 		if(isEditing_) {
 			for(float[] v : vertices_) {
@@ -53,6 +56,7 @@ public class ShapePolyline extends Shape {
 			}
 			return;
 		}
+		gl.glPopMatrix();
 	}
 
 	@Override

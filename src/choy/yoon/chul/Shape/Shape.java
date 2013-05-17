@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import javax.microedition.khronos.opengles.GL10;
 
+import choy.yoon.chul.GLESHelper;
 import choy.yoon.chul.MathHelper;
 
 import android.graphics.Rect;
@@ -12,9 +13,11 @@ public abstract class Shape {
 	
 	//float[][3] 형식을 지킬 것.
 	protected ArrayList<float[]> vertices_;
+	protected float[] color_;
 	
 	public Shape() {
 		vertices_ = new ArrayList<float[]>();
+		color_ = GLESHelper.GetARGB(0xFFFFFFFF);
 	}
 	
 	abstract public void Draw(GL10 gl);
@@ -50,8 +53,17 @@ public abstract class Shape {
 		}
 		return including;
 	}
+	
 	public ArrayList<float[]> GetVertices() {
 		return vertices_;
+	}
+	
+	public void SetColor(float[] color) {
+		color_ = color;
+	}
+	
+	public float[] GetColor() {
+		return color_;
 	}
 	
 	//기본적인 rect 구하는 방법

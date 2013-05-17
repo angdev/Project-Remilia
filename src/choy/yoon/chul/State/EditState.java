@@ -27,6 +27,10 @@ public class EditState implements IState {
 		shape_ = shape;
 		shapeEditor_.SetShape(shape);
 	}
+	
+	public Shape GetShape() {
+		return shape_;
+	}
 
 	@Override
 	public void onTouch(MotionEvent event) {
