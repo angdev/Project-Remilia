@@ -19,7 +19,6 @@ public abstract class Shape {
 	
 	abstract public void Draw(GL10 gl);
 	abstract public ShapeEnumType GetType();
-	//내부 정보 갱신
 	abstract public boolean IsFreeTransformable();
 	abstract public boolean IsScalable();
 	abstract public boolean IsRotatable();
@@ -40,7 +39,7 @@ public abstract class Shape {
 	public boolean IsSelected(float x, float y) {
 		boolean including = false;
 		float xi, yi, xj, yj;
-		for(int i=0, j = vertices_.size()-1; i<vertices_.size(); ++i) {
+		for(int i=0, j = vertices_.size()-1; i<vertices_.size(); j = i++) {
 			xi = vertices_.get(i)[0];
 			yi = vertices_.get(i)[1];
 			xj = vertices_.get(j)[0];

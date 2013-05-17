@@ -4,42 +4,35 @@ import javax.microedition.khronos.opengles.GL10;
 
 import choy.yoon.chul.GLESHelper;
 
-public class ShapeEllipse extends Shape {
-	
-	private static ShapeEnumType type_ = ShapeEnumType.kShapeEllipse;
-	//TODO: 생성 이후 필요없어지는 문제.
-	private float[] center_;
-	//장축, 단축
-	private float majorAxis_, minorAxis_;
+public class ShapeRectangle extends Shape {
 
-	public ShapeEllipse() {
+	private static ShapeEnumType type_ = ShapeEnumType.kShapeRectangle;
+	private float[] center_;
+	
+	public ShapeRectangle() {
 		super();
-		center_ = new float[]{0, 0, 0};
-		
-		for(int i=0; i<50; ++i) {
+		for(int i=0; i<4; ++i) {
 			vertices_.add(new float[]{0, 0, 0});
 		}
+		center_ = new float[]{0, 0, 0};
 	}
 	
-	public void SetCenter(float x, float y) {
-		center_[0] = x;
-		center_[1] = y;
+	public void SetCenter(float centerX, float centerY) {
+		center_[0] = centerX;
+		center_[1] = centerY;
 	}
 	
-	public float[] GetCenter() {
-		return center_;
+	public void SetSize(float width, float height) {
+		vertices_.get(0)[0] = center_[0] - width / 2;
+		vertices_.get(0)[1] = center_[1] - height / 2;
+		vertices_.get(1)[0] = center_[0] - width / 2;
+		vertices_.get(1)[1] = center_[1] + height / 2;
+		vertices_.get(2)[0] = center_[0]+ width / 2;
+		vertices_.get(2)[1] = center_[1] + height / 2;
+		vertices_.get(3)[0] = center_[0] + width / 2;
+		vertices_.get(3)[1] = center_[1] - height / 2;
 	}
 	
-	public void SetAxis(float major, float minor) {
-		majorAxis_ = major;
-		minorAxis_ = minor;
-		
-		for(int i=0; i<50; ++i) {
-			vertices_.get(i)[0] = (float) (majorAxis_ * Math.cos(i * 2 * Math.PI / 50) + center_[0]);
-			vertices_.get(i)[1] = (float) (minorAxis_ * Math.sin(i * 2 * Math.PI / 50) + center_[1]);
-		}
-	}
-
 	@Override
 	public void Draw(GL10 gl) {
 		gl.glEnableClientState(GL10.GL_VERTEX_ARRAY);

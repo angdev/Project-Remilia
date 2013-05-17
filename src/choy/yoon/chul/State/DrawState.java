@@ -7,6 +7,7 @@ import choy.yoon.chul.Shape.ShapeDot;
 import choy.yoon.chul.Shape.ShapeEllipse;
 import choy.yoon.chul.Shape.ShapeEnumType;
 import choy.yoon.chul.Shape.ShapeLine;
+import choy.yoon.chul.Shape.ShapeRectangle;
 import choy.yoon.chul.State.PaintStateManager.StateType;
 
 public class DrawState implements IState {
@@ -58,6 +59,19 @@ public class DrawState implements IState {
 				break;
 			}
 		}
+		else if(currentShape_.GetType() == ShapeEnumType.kShapeRectangle) {
+			ShapeRectangle rect = (ShapeRectangle)currentShape_;
+			switch(event.getAction()) {
+			case MotionEvent.ACTION_MOVE:
+				rect.SetCenter((event.getX() + startPoint_[0])/2, (event.getY() + startPoint_[1])/2);
+				rect.SetSize(Math.abs(event.getX() - startPoint_[0]), Math.abs(event.getY() - startPoint_[1]));
+				break;
+			case MotionEvent.ACTION_UP:
+				currentShape_ = null;
+				PaintStateManager.GetInstance().SetState(StateType.kStateInit);
+				break;
+			}
+		}
 		else if(currentShape_.GetType() == ShapeEnumType.kShapeEllipse) {
 			ShapeEllipse ellipse = (ShapeEllipse)currentShape_;
 			switch(event.getAction()) {
@@ -80,6 +94,9 @@ public class DrawState implements IState {
 			break;
 		case kShapeDot:
 			currentShape_ = new ShapeDot();
+			break;
+		case kShapeRectangle:
+			currentShape_ = new ShapeRectangle();
 			break;
 		case kShapeEllipse:
 			currentShape_ = new ShapeEllipse();
