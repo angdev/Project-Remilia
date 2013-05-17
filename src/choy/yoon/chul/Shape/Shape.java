@@ -17,6 +17,7 @@ public abstract class Shape {
 	protected ArrayList<float[]> uvs_;
 	protected int[] texPtr_;
 	protected boolean texBinded_;
+	protected Bitmap bitmap_;
 	protected float[] color_;
 	
 	public Shape() {
@@ -27,11 +28,24 @@ public abstract class Shape {
 		texBinded_ = false;
 	}
 	
-	abstract public void Draw(GL10 gl);
 	abstract public ShapeEnumType GetType();
 	abstract public boolean IsFreeTransformable();
 	abstract public boolean IsScalable();
 	abstract public boolean IsRotatable();
+	
+	public void Draw(GL10 gl) {
+		BindTexture(gl);
+		gl.glEnableClientState(GL10.GL_VERTEX_ARRAY);
+		gl.glEnable(GL10.GL_TEXTURE_2D);
+		gl.glEnableClientState(GL10.GL_TEXTURE_COORD_ARRAY);
+		gl.glTexCoordPointer(2, GL10.GL_FLOAT, 0, GLESHelper.UVArrayToBuffer(uvs_.toArray(new float[][]{})));
+		gl.glColor4f(color_[1], color_[2], color_[3], color_[0]);
+		gl.glVertexPointer(3, GL10.GL_FLOAT, 0, GLESHelper.ArrayToBuffer(vertices_.toArray(new float[][]{})));
+		gl.glDrawArrays(GL10.GL_TRIANGLE_FAN, 0, vertices_.size());
+		gl.glDisableClientState(GL10.GL_VERTEX_ARRAY);
+		gl.glDisable(GL10.GL_TEXTURE_2D);
+		gl.glDisableClientState(GL10.GL_TEXTURE_COORD_ARRAY);
+	}
 	
 	public void Translate(float dx, float dy) {
 		MathHelper.TranslateVertices(vertices_, dx, dy);
@@ -83,15 +97,20 @@ public abstract class Shape {
 				(vertices_.get(i)[1] - r.top)/height
 			});
 		}
-		
-		GL10 gl = GLESHelper.GetGL();
-		gl.glGenTextures(1, texPtr_, 0);
-		gl.glBindTexture(GL10.GL_TEXTURE_2D, texPtr_[0]);
-		gl.glTexParameterf(GL10.GL_TEXTURE_2D, GL10.GL_TEXTURE_MAG_FILTER, GL10.GL_LINEAR);
-	    gl.glTexParameterf(GL10.GL_TEXTURE_2D, GL10.GL_TEXTURE_MIN_FILTER, GL10.GL_NEAREST);
-	    GLUtils.texImage2D(GL10.GL_TEXTURE_2D, 0, bitmap, 0);
-	    bitmap.recycle();
+		bitmap_ = bitmap;
 	    texBinded_ = true;
+	}
+	
+	public void BindTexture(GL10 gl) {
+		if(texBinded_ == true) {
+			gl.glGenTextures(1, texPtr_, 0);
+			gl.glBindTexture(GL10.GL_TEXTURE_2D, texPtr_[0]);
+			gl.glTexParameterf(GL10.GL_TEXTURE_2D, GL10.GL_TEXTURE_MAG_FILTER, GL10.GL_LINEAR);
+			gl.glTexParameterf(GL10.GL_TEXTURE_2D, GL10.GL_TEXTURE_MIN_FILTER, GL10.GL_NEAREST);
+			GLUtils.texImage2D(GL10.GL_TEXTURE_2D, 0, bitmap_, 0);
+			bitmap_.recycle();
+			texBinded_ = false;
+		}
 	}
 	
 	//기본적인 rect 구하는 방법

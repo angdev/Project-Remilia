@@ -80,7 +80,6 @@ public class MainActivity extends Activity implements
 				StateType.kStateEdit);
 		if (state.GetShape() != null) {
 			state.GetShape().SetColor(GLESHelper.GetARGB(color));
-			state.GetShape().SetTexture(selectedTexture);
 		}
 	}
 

@@ -1,8 +1,5 @@
 package choy.yoon.chul.Shape;
 
-import javax.microedition.khronos.opengles.GL10;
-
-import choy.yoon.chul.GLESHelper;
 
 public class ShapeEllipse extends Shape {
 	
@@ -38,25 +35,6 @@ public class ShapeEllipse extends Shape {
 			vertices_.get(i)[0] = (float) (majorAxis_ * Math.cos(i * 2 * Math.PI / 50) + center_[0]);
 			vertices_.get(i)[1] = (float) (minorAxis_ * Math.sin(i * 2 * Math.PI / 50) + center_[1]);
 		}
-	}
-
-	@Override
-	public void Draw(GL10 gl) {
-		gl.glEnableClientState(GL10.GL_VERTEX_ARRAY);
-		if(texBinded_) {
-			gl.glEnable(GL10.GL_TEXTURE_2D);
-			gl.glEnableClientState(GL10.GL_TEXTURE_COORD_ARRAY);
-			gl.glTexCoordPointer(2, GL10.GL_FLOAT, 0, GLESHelper.UVArrayToBuffer(uvs_.toArray(new float[][]{})));
-		}
-		gl.glColor4f(color_[1], color_[2], color_[3], color_[0]);
-		gl.glVertexPointer(3, GL10.GL_FLOAT, 0, GLESHelper.ArrayToBuffer(vertices_.toArray(new float[][]{})));
-		gl.glDrawArrays(GL10.GL_TRIANGLE_FAN, 0, vertices_.size());
-		gl.glDisableClientState(GL10.GL_VERTEX_ARRAY);
-		if(texBinded_) {
-			gl.glDisable(GL10.GL_TEXTURE_2D);
-			gl.glDisableClientState(GL10.GL_TEXTURE_COORD_ARRAY);
-		}
-		
 	}
 
 	@Override

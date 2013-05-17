@@ -10,17 +10,7 @@ import javax.microedition.khronos.opengles.GL10;
 import android.graphics.Rect;
 
 public class GLESHelper {
-	
-	private static GL10 gl_;
-	
-	public static void SetGL(GL10 gl) {
-		gl_ = gl;
-	}
-	
-	public static GL10 GetGL() {
-		return gl_;
-	}
-	
+		
 	public static FloatBuffer ArrayToBuffer(float[][] arr) {
 		ByteBuffer vbb = ByteBuffer.allocateDirect(arr.length * 3 * 4);
 		vbb.order(ByteOrder.nativeOrder());
