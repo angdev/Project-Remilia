@@ -70,10 +70,15 @@ public class MainActivity extends Activity implements ColorPickerDialog.OnColorC
 		EditState state = (EditState)PaintStateManager.GetInstance().GetState(StateType.kStateEdit);
 		if(state.GetShape() != null) {
 			state.GetShape().SetColor(GLESHelper.GetARGB(color));
+			state.GetShape().SetTexture(selectedTexture);
 		}
 	}
 	
 	public void textureChanged(Bitmap texture) {
 		selectedTexture = texture;
+		EditState state = (EditState)PaintStateManager.GetInstance().GetState(StateType.kStateEdit);
+		if(state.GetShape() != null) {
+			state.GetShape().SetTexture(texture);
+		}
 	}
 }

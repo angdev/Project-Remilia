@@ -4,20 +4,27 @@ import java.util.ArrayList;
 
 import javax.microedition.khronos.opengles.GL10;
 
+import android.graphics.Bitmap;
+import android.graphics.Rect;
+import android.opengl.GLUtils;
 import choy.yoon.chul.GLESHelper;
 import choy.yoon.chul.MathHelper;
-
-import android.graphics.Rect;
 
 public abstract class Shape {
 	
 	//float[][3] 형식을 지킬 것.
 	protected ArrayList<float[]> vertices_;
+	protected ArrayList<float[]> uvs_;
+	protected int[] texPtr_;
+	protected boolean texBinded_;
 	protected float[] color_;
 	
 	public Shape() {
 		vertices_ = new ArrayList<float[]>();
+		uvs_ = new ArrayList<float[]>();
 		color_ = GLESHelper.GetARGB(0xFFFFFFFF);
+		texPtr_ = new int[1];
+		texBinded_ = false;
 	}
 	
 	abstract public void Draw(GL10 gl);
@@ -64,6 +71,27 @@ public abstract class Shape {
 	
 	public float[] GetColor() {
 		return color_;
+	}
+	
+	public void SetTexture(Bitmap bitmap) {
+		Rect r = GetRect();
+		int width = r.right - r.left;
+		int height = r.bottom - r.top;
+		for(int i=0; i<vertices_.size(); ++i) {
+			uvs_.add(new float[]{
+				(vertices_.get(i)[0] - r.left)/width,
+				(vertices_.get(i)[1] - r.top)/height
+			});
+		}
+		
+		GL10 gl = GLESHelper.GetGL();
+		gl.glGenTextures(1, texPtr_, 0);
+		gl.glBindTexture(GL10.GL_TEXTURE_2D, texPtr_[0]);
+		gl.glTexParameterf(GL10.GL_TEXTURE_2D, GL10.GL_TEXTURE_MAG_FILTER, GL10.GL_LINEAR);
+	    gl.glTexParameterf(GL10.GL_TEXTURE_2D, GL10.GL_TEXTURE_MIN_FILTER, GL10.GL_NEAREST);
+	    GLUtils.texImage2D(GL10.GL_TEXTURE_2D, 0, bitmap, 0);
+	    bitmap.recycle();
+	    texBinded_ = true;
 	}
 	
 	//기본적인 rect 구하는 방법
