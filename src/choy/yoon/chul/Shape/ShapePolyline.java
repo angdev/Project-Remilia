@@ -2,20 +2,22 @@ package choy.yoon.chul.Shape;
 
 import javax.microedition.khronos.opengles.GL10;
 
+import android.util.Log;
+
 import choy.yoon.chul.GLESHelper;
 
-public class ShapePolygon extends Shape {
-	
-	private static ShapeEnumType type_ = ShapeEnumType.kShapePolygon;
+public class ShapePolyline extends Shape {
+
+	private static ShapeEnumType type_ = ShapeEnumType.kShapePolyline;
 	private boolean isEditing_;
-	
-	public ShapePolygon() {
+
+	public ShapePolyline() {
 		super();
 		isEditing_ = true;
 	}
 	
 	public synchronized void AddVertex(float x, float y) {
-		if(vertices_.size() > 0 && vertices_.get(0).equals(GetNearVertex(x, y))) {
+		if(vertices_.size() > 0 && vertices_.get(vertices_.size()-1).equals(GetNearVertex(x, y))) {
 			endEditing();
 			return;
 		}
@@ -29,21 +31,28 @@ public class ShapePolygon extends Shape {
 	private void endEditing() {
 		isEditing_ = false;
 	}
-
+	
+	@Override
+	public boolean IsSelected(float x, float y) {
+		//직선거리
+		for(float[] v : vertices_) {
+			Log.d("", ""+((v[0] - x) * (v[0] - x) + (v[1] - y) * (v[1] - y)));
+			if((v[0] - x) * (v[0] - x) + (v[1] - y) * (v[1] - y) < 5000) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
 	@Override
 	public void Draw(GL10 gl) {
+		GLESHelper.DrawOpenPolygon(gl, vertices_);
 		if(isEditing_) {
-			GLESHelper.DrawOpenPolygon(gl, vertices_);
 			for(float[] v : vertices_) {
 				GLESHelper.DrawPoint(gl, v[0], v[1]);
 			}
 			return;
 		}
-		gl.glEnableClientState(GL10.GL_VERTEX_ARRAY);
-		gl.glColor4f(1, 1, 1, 1);
-		gl.glVertexPointer(3, GL10.GL_FLOAT, 0, GLESHelper.ArrayToBuffer(vertices_.toArray(new float[][]{})));
-		gl.glDrawArrays(GL10.GL_TRIANGLE_FAN, 0, vertices_.size());
-		gl.glDisableClientState(GL10.GL_VERTEX_ARRAY);
 	}
 
 	@Override
