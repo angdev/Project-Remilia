@@ -1,6 +1,8 @@
 package choy.yoon.chul;
 
 import android.app.Activity;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -14,6 +16,7 @@ import choy.yoon.chul.State.PaintStateManager.StateType;
 
 public class MainActivity extends Activity implements ColorPickerDialog.OnColorChangedListener {
 	private int selectedColor;
+	private Bitmap selectedTexture;
 	private PaintView paintView;
 	
 	@Override
@@ -22,6 +25,8 @@ public class MainActivity extends Activity implements ColorPickerDialog.OnColorC
 		PaintStateManager.GetInstance().SetContext(this);
 		paintView = new PaintView(this);
 		setContentView(paintView);
+		
+		selectedTexture = BitmapFactory.decodeResource(getResources(), R.drawable.sample);
 	}
 
 	@Override
@@ -66,5 +71,9 @@ public class MainActivity extends Activity implements ColorPickerDialog.OnColorC
 		if(state.GetShape() != null) {
 			state.GetShape().SetColor(GLESHelper.GetARGB(color));
 		}
+	}
+	
+	public void textureChanged(Bitmap texture) {
+		selectedTexture = texture;
 	}
 }
