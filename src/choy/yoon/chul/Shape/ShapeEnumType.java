@@ -6,5 +6,6 @@ public enum ShapeEnumType {
 	kShapeLine,
 	kShapeEllipse,
 	kShapeRectangle,
+	kShapePolygon,
 	kShapeBound,
 }

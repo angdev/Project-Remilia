@@ -35,19 +35,7 @@ public class GLESHelper {
 		return ArrayToBuffer(points.toArray(new float[][]{}));
 	}
 	
-	public static FloatBuffer PolygonBufferFromVertices(float[][] vertices) {
-		if(vertices.length < 2) {
-			return null;
-		}
-		ArrayList<float[]> points = new ArrayList<float[]>();
-		points.add(vertices[0]);
-		for(int i=1; i<vertices.length; ++i) {
-			points.add(vertices[i]);
-			points.add(vertices[i]);
-		}
-		points.add(vertices[0]);
-		return ArrayToBuffer(points.toArray(new float[][]{}));
-	}
+	
 	
 	public static ArrayList<float[]> GetRectVerticesFromPoint(float x, float y, float size) {
 		ArrayList<float[]> arr = new ArrayList<float[]>();
@@ -60,7 +48,7 @@ public class GLESHelper {
 	
 	public static void DrawPoint(GL10 gl, float x, float y) {
 		gl.glEnableClientState(GL10.GL_VERTEX_ARRAY);
-		gl.glColor4f(1, 1, 1, 1);
+		gl.glColor4f(1, 1, 0, 1);
 		gl.glLineWidthx(1);
 		gl.glVertexPointer(3, GL10.GL_FLOAT, 0,
 				PolygonBufferFromVertices(GetRectVerticesFromPoint(x, y, 10)));
@@ -70,6 +58,9 @@ public class GLESHelper {
 	
 	//outline only
 	public static void DrawPolygon(GL10 gl, ArrayList<float[]> vertices) {
+		if(vertices.size() < 2) {
+			return;
+		}
 		gl.glEnableClientState(GL10.GL_VERTEX_ARRAY);
 		gl.glColor4f(0, 1, 0, 1);
 		gl.glLineWidthx(1);
@@ -79,15 +70,29 @@ public class GLESHelper {
 		gl.glDisableClientState(GL10.GL_VERTEX_ARRAY);
 	}
 	
-	public static void DrawPolygon(GL10 gl, float[][] vertices) {
+	
+
+	//outline only
+	public static void DrawOpenPolygon(GL10 gl, ArrayList<float[]> vertices) {
+		if(vertices.size() < 2) {
+			return;
+		}
+
+		ArrayList<float[]> points = new ArrayList<float[]>();
+		for(int i=0; i<vertices.size()-1; ++i) {
+			points.add(vertices.get(i));
+			points.add(vertices.get(i+1));
+		}
+
 		gl.glEnableClientState(GL10.GL_VERTEX_ARRAY);
 		gl.glColor4f(0, 1, 0, 1);
 		gl.glLineWidthx(1);
 		gl.glVertexPointer(3, GL10.GL_FLOAT, 0,
-				PolygonBufferFromVertices(vertices));
-		gl.glDrawArrays(GL10.GL_LINES, 0, vertices.length * 2);
+				ArrayToBuffer(points.toArray(new float[][]{})));
+		gl.glDrawArrays(GL10.GL_LINES, 0, vertices.size() * 2 - 2);
 		gl.glDisableClientState(GL10.GL_VERTEX_ARRAY);
 	}
+	
 	
 	public static void DrawRect(GL10 gl, Rect r) {
 		ArrayList<float[]> arr = new ArrayList<float[]>();

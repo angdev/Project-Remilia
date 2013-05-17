@@ -7,6 +7,7 @@ import choy.yoon.chul.Shape.ShapeDot;
 import choy.yoon.chul.Shape.ShapeEllipse;
 import choy.yoon.chul.Shape.ShapeEnumType;
 import choy.yoon.chul.Shape.ShapeLine;
+import choy.yoon.chul.Shape.ShapePolygon;
 import choy.yoon.chul.Shape.ShapeRectangle;
 import choy.yoon.chul.State.PaintStateManager.StateType;
 
@@ -85,6 +86,20 @@ public class DrawState implements IState {
 				break;
 			}
 		}
+		else if(currentShape_.GetType() == ShapeEnumType.kShapePolygon) {
+			ShapePolygon polygon = (ShapePolygon)currentShape_;
+			switch(event.getAction()) {
+			case MotionEvent.ACTION_DOWN:
+				polygon.AddVertex(event.getX(), event.getY());
+				break;
+			case MotionEvent.ACTION_UP:
+				if(!polygon.IsEditing()) {
+					currentShape_ = null;
+					PaintStateManager.GetInstance().SetState(StateType.kStateInit);
+				}
+				break;
+			}
+		}
 	}
 	
 	public void SetShape(ShapeEnumType type) {
@@ -97,6 +112,9 @@ public class DrawState implements IState {
 			break;
 		case kShapeRectangle:
 			currentShape_ = new ShapeRectangle();
+			break;
+		case kShapePolygon:
+			currentShape_ = new ShapePolygon();
 			break;
 		case kShapeEllipse:
 			currentShape_ = new ShapeEllipse();

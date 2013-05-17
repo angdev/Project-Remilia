@@ -84,6 +84,9 @@ public class PaintStateManager {
 		case R.id.action_rectangle:
 			type = ShapeEnumType.kShapeRectangle;
 			break;
+		case R.id.action_polygon:
+			type = ShapeEnumType.kShapePolygon;
+			break;
 		default:
 			type = ShapeEnumType.kShapeNull;
 			break;
