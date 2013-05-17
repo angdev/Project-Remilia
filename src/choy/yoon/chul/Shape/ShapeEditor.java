@@ -22,6 +22,10 @@ public class ShapeEditor {
 	private float[] selectedVertex_ = null;
 	private float[] selectedVertexCounter_ = null;
 	
+	//translate
+	private float oldTouchX_;
+	private float oldTouchY_;
+	
 	public ShapeEditor() {
 		editType_ = EditEnumType.kEditFreeTransform;
 		selectedVertexOld_ = new float[3];
@@ -40,7 +44,7 @@ public class ShapeEditor {
 		if(type == EditEnumType.kEditDelete) {
 			if(shape_ != null) {
 				DrawableShapeList.getInstance().RemoveShape(shape_);
-				DeselectVertex();
+				Deselect();
 				shape_ = null;
 			}
 			PaintStateManager.GetInstance().SetState(StateType.kStateInit);
@@ -49,11 +53,19 @@ public class ShapeEditor {
 		editType_ = type;
 	}
 	
-	public boolean SelectVertex(float x, float y) {
+	public boolean Select(float x, float y) {
 		if(editType_ == EditEnumType.kEditFreeTransform) {
 			selectedVertex_ = shape_.GetNearVertex(x, y);
 			return (selectedVertex_ != null);
 		}
+		
+		oldTouchX_ = x;
+		oldTouchY_ = y;
+	
+		if(editType_ == EditEnumType.kEditTranslate) {
+			return shape_.IsSelected(x, y);
+		}
+		
 		selectedVertexIndex_ = bound_.GetVertices().indexOf(bound_.GetNearVertex(x, y));
 		if(selectedVertexIndex_ < 0) {
 			return false;
@@ -66,7 +78,7 @@ public class ShapeEditor {
 		return (selectedVertex_ != null);
 	}
 	
-	public void MoveVertex(float x, float y) {
+	public void Move(float x, float y) {
 		switch(editType_) {
 		case kEditFreeTransform:
 			editFreeTransform(x, y);
@@ -83,7 +95,7 @@ public class ShapeEditor {
 		}
 	}
 	
-	public void DeselectVertex() {
+	public void Deselect() {
 		selectedVertex_ = null;
 		selectedVertexOld_[0] = 0;
 		selectedVertexOld_[0] = 1;
@@ -123,11 +135,10 @@ public class ShapeEditor {
 	}
 	
 	private void editTranslate(float touchX, float touchY) {
-		if(selectedVertex_ == null) {
-			return;
-		}
-		float dx = (touchX - selectedVertex_[0]);
-		float dy = (touchY - selectedVertex_[1]);
+		float dx = (touchX - oldTouchX_);
+		float dy = (touchY - oldTouchY_);
+		oldTouchX_ = touchX;
+		oldTouchY_ = touchY;
 		shape_.Translate(dx, dy);
 		bound_.Translate(dx, dy);
 	}

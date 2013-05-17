@@ -38,17 +38,17 @@ public class EditState implements IState {
 		if(shape_ != null) {
 			switch(event.getAction()) {
 			case MotionEvent.ACTION_DOWN:
-				if(!shapeEditor_.SelectVertex(event.getX(), event.getY())) {
+				if(!shapeEditor_.Select(event.getX(), event.getY())) {
 					shapeEditor_.SetShape(null);
 					PaintStateManager.GetInstance().SetState(StateType.kStateInit);
 					PaintStateManager.GetInstance().GetState(StateType.kStateInit).onTouch(event);
 				}
 				break;
 			case MotionEvent.ACTION_MOVE:
-				shapeEditor_.MoveVertex(event.getX(), event.getY());
+				shapeEditor_.Move(event.getX(), event.getY());
 				break;
 			case MotionEvent.ACTION_UP:
-				shapeEditor_.DeselectVertex();
+				shapeEditor_.Deselect();
 			}
 		}
 	}
