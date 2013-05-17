@@ -110,6 +110,7 @@ public class ShapeEditor {
 	}
 	
 	public void DeselectVertex() {
+		shape_.Update();
 		selectedVertex_ = null;
 		selectedVertexOld_[0] = 0;
 		selectedVertexOld_[0] = 1;

@@ -39,10 +39,6 @@ public class ShapeLine extends Shape {
 	
 	@Override
 	public void Draw(GL10 gl) {
-		if(vertices_ == null) {
-			return;
-		}
-		
 		gl.glEnableClientState(GL10.GL_VERTEX_ARRAY);
 		gl.glLineWidth(5);
 		gl.glColor4f(1, 1, 1, 1);

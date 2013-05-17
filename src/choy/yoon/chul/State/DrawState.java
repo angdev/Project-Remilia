@@ -4,15 +4,17 @@ import android.view.MotionEvent;
 import choy.yoon.chul.Shape.DrawableShapeList;
 import choy.yoon.chul.Shape.Shape;
 import choy.yoon.chul.Shape.ShapeDot;
+import choy.yoon.chul.Shape.ShapeEllipse;
 import choy.yoon.chul.Shape.ShapeEnumType;
 import choy.yoon.chul.Shape.ShapeLine;
 import choy.yoon.chul.State.PaintStateManager.StateType;
 
 public class DrawState implements IState {
 	private Shape currentShape_;
+	private float[] startPoint_;
 	
 	public DrawState() {
-		
+		startPoint_ = new float[]{0, 0, 0};
 	}
 
 	@Override
@@ -20,6 +22,12 @@ public class DrawState implements IState {
 		if(currentShape_ == null) {
 			return;
 		}
+		
+		if(event.getAction() == MotionEvent.ACTION_DOWN) {
+			startPoint_[0] = event.getX();
+			startPoint_[1] = event.getY();
+		}
+		
 		if(currentShape_.GetType() == ShapeEnumType.kShapeLine) {
 			switch(event.getAction()) {
 			case MotionEvent.ACTION_DOWN:
@@ -42,8 +50,20 @@ public class DrawState implements IState {
 				dot.SetPosition(event.getX(), event.getY());
 				break;
 			case MotionEvent.ACTION_MOVE:
-				
 				dot.SetPosition(event.getX(), event.getY());
+				break;
+			case MotionEvent.ACTION_UP:
+				currentShape_ = null;
+				PaintStateManager.GetInstance().SetState(StateType.kStateInit);
+				break;
+			}
+		}
+		else if(currentShape_.GetType() == ShapeEnumType.kShapeEllipse) {
+			ShapeEllipse ellipse = (ShapeEllipse)currentShape_;
+			switch(event.getAction()) {
+			case MotionEvent.ACTION_MOVE:
+				ellipse.SetCenter((event.getX() + startPoint_[0])/2, (event.getY() + startPoint_[1])/2);
+				ellipse.SetAxis(Math.abs(event.getX() - startPoint_[0])/2, Math.abs(event.getY() - startPoint_[1])/2);
 				break;
 			case MotionEvent.ACTION_UP:
 				currentShape_ = null;
@@ -60,6 +80,9 @@ public class DrawState implements IState {
 			break;
 		case kShapeDot:
 			currentShape_ = new ShapeDot();
+			break;
+		case kShapeEllipse:
+			currentShape_ = new ShapeEllipse();
 			break;
 		default:
 			break;

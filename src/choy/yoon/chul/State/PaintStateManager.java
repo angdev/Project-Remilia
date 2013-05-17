@@ -78,6 +78,9 @@ public class PaintStateManager {
 		case R.id.action_dot:
 			type = ShapeEnumType.kShapeDot;
 			break;
+		case R.id.action_ellipse:
+			type = ShapeEnumType.kShapeEllipse;
+			break;
 		default:
 			type = ShapeEnumType.kShapeNull;
 			break;

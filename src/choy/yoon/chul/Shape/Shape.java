@@ -17,10 +17,14 @@ public abstract class Shape {
 	
 	abstract public void Draw(GL10 gl);
 	abstract public ShapeEnumType GetType();
+	//내부 정보 갱신
 	abstract public boolean IsFreeTransformable();
 	abstract public boolean IsScalable();
 	abstract public boolean IsRotatable();
-	
+
+	public void Update() {
+		
+	}
 	
 	//점을 포함하는지 검사한다. 기본적으로는 닫힌 도형 베이스라 열린 도형의 경우에는 오버라이딩을 하자.
 	public boolean IsSelected(float x, float y) {
@@ -41,6 +45,7 @@ public abstract class Shape {
 		return vertices_;
 	}
 	
+	//기본적인 rect 구하는 방법
 	public Rect GetRect() {
 		float left = Float.MAX_VALUE, right = Float.MIN_VALUE,
 				top = Float.MAX_VALUE, bottom = Float.MIN_VALUE;
