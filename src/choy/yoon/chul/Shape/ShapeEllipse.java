@@ -49,7 +49,8 @@ public class ShapeEllipse extends Shape {
 	}
 	
 	@Override
-	public void Update() {
+	public void Scale(float scaleX, float scaleY, float originX, float originY) {
+		super.Scale(scaleX, scaleY, originX, originY);
 		Rect r = GetRect();
 		center_[0] = (r.left + r.right) / 2;
 		center_[1] = (r.top + r.bottom) / 2;

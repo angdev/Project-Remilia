@@ -4,6 +4,8 @@ import java.util.ArrayList;
 
 import javax.microedition.khronos.opengles.GL10;
 
+import choy.yoon.chul.MathHelper;
+
 import android.graphics.Rect;
 
 public abstract class Shape {
@@ -21,9 +23,17 @@ public abstract class Shape {
 	abstract public boolean IsFreeTransformable();
 	abstract public boolean IsScalable();
 	abstract public boolean IsRotatable();
-
-	public void Update() {
-		
+	
+	public void Translate(float dx, float dy) {
+		MathHelper.TranslateVertices(vertices_, dx, dy);
+	}
+	
+	public void Rotate(float radian, float originX, float originY) {
+		MathHelper.RotateVertices(vertices_, radian, originX, originY);
+	}
+	
+	public void Scale(float scaleX, float scaleY, float originX, float originY) {
+		MathHelper.ScaleVertices(vertices_, scaleX, scaleY, originX, originY);
 	}
 	
 	//점을 포함하는지 검사한다. 기본적으로는 닫힌 도형 베이스라 열린 도형의 경우에는 오버라이딩을 하자.
