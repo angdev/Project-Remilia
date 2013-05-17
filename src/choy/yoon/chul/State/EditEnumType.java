@@ -4,5 +4,6 @@ public enum EditEnumType {
 	kEditFreeTransform,
 	kEditScale,
 	kEditRotate,
-	kEditTranslate
+	kEditTranslate,
+	kEditDelete,
 }

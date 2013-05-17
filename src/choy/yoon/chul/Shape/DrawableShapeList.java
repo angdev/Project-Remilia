@@ -24,6 +24,10 @@ public class DrawableShapeList {
 	public void AddShape(Shape shape) {
 		shapes_.add(shape);
 	}
+	
+	public void RemoveShape(Shape shape) {
+		shapes_.remove(shape);
+	}
 
 	public void SetShapeEditor(ShapeEditor shapeEditor) {
 		shapeEditor_ = shapeEditor;

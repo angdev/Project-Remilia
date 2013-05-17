@@ -112,6 +112,9 @@ public class PaintStateManager {
 		case R.id.action_edit_translate:
 			editState_.SetEditType(EditEnumType.kEditTranslate);
 			break;
+		case R.id.action_edit_delete:
+			editState_.SetEditType(EditEnumType.kEditDelete);
+			break;
 		}
 	}
 	

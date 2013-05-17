@@ -6,6 +6,8 @@ import javax.microedition.khronos.opengles.GL10;
 
 import choy.yoon.chul.GLESHelper;
 import choy.yoon.chul.State.EditEnumType;
+import choy.yoon.chul.State.PaintStateManager;
+import choy.yoon.chul.State.PaintStateManager.StateType;
 
 public class ShapeEditor {
 	
@@ -35,6 +37,15 @@ public class ShapeEditor {
 	}
 	
 	public void SetEditType(EditEnumType type) {
+		if(type == EditEnumType.kEditDelete) {
+			if(shape_ != null) {
+				DrawableShapeList.getInstance().RemoveShape(shape_);
+				DeselectVertex();
+				shape_ = null;
+			}
+			PaintStateManager.GetInstance().SetState(StateType.kStateInit);
+			return;
+		}
 		editType_ = type;
 	}
 	
