@@ -14,7 +14,7 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import choy.yoon.chul.State.EditState;
 import choy.yoon.chul.State.PaintStateManager;
-import choy.yoon.chul.State.PaintStateManager.StateType;
+import choy.yoon.chul.State.StateType;
 
 public class MainActivity extends Activity implements
 		ColorPickerDialog.OnColorChangedListener {

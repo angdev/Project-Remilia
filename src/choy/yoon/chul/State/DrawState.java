@@ -10,9 +10,11 @@ import choy.yoon.chul.Shape.ShapeLine;
 import choy.yoon.chul.Shape.ShapePolygon;
 import choy.yoon.chul.Shape.ShapePolyline;
 import choy.yoon.chul.Shape.ShapeRectangle;
-import choy.yoon.chul.State.PaintStateManager.StateType;
 
 public class DrawState implements IState {
+	
+	private static StateType type_ = StateType.kStateInit;
+	
 	private Shape currentShape_;
 	private float[] startPoint_;
 	
@@ -170,5 +172,10 @@ public class DrawState implements IState {
 		}
 		//리스트에 추가
 		DrawableShapeList.getInstance().AddShape(currentShape_);	
+	}
+
+	@Override
+	public StateType GetType() {
+		return type_;
 	}
 }

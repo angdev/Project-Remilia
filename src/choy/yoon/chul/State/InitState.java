@@ -1,11 +1,13 @@
 package choy.yoon.chul.State;
 
 import android.view.MotionEvent;
-import choy.yoon.chul.Shape.Shape;
 import choy.yoon.chul.Shape.DrawableShapeList;
-import choy.yoon.chul.State.PaintStateManager.StateType;
+import choy.yoon.chul.Shape.Shape;
 
 public class InitState implements IState {
+	
+	private static StateType type_ = StateType.kStateInit;
+	
 	public InitState() {
 		
 	}
@@ -20,5 +22,10 @@ public class InitState implements IState {
 			state.SetShape(shape);
 			PaintStateManager.GetInstance().SetState(StateType.kStateEdit);
 		}
+	}
+
+	@Override
+	public StateType GetType() {
+		return type_;
 	}
 }

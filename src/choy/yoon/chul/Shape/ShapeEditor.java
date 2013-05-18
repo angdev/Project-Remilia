@@ -7,7 +7,7 @@ import javax.microedition.khronos.opengles.GL10;
 import choy.yoon.chul.GLESHelper;
 import choy.yoon.chul.State.EditEnumType;
 import choy.yoon.chul.State.PaintStateManager;
-import choy.yoon.chul.State.PaintStateManager.StateType;
+import choy.yoon.chul.State.StateType;
 
 public class ShapeEditor {
 	

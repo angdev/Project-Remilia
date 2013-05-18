@@ -4,6 +4,9 @@ import java.util.ArrayList;
 
 import javax.microedition.khronos.opengles.GL10;
 
+import choy.yoon.chul.State.PaintStateManager;
+import choy.yoon.chul.State.StateType;
+
 public class DrawableShapeList {
 	private static DrawableShapeList instance_ = null;
 	private ArrayList<Shape> shapes_;
@@ -47,7 +50,7 @@ public class DrawableShapeList {
 		for(Shape shape : shapes_) {
 			shape.Draw(gl);
 		}
-		if(shapeEditor_ != null) {
+		if(shapeEditor_ != null && PaintStateManager.GetInstance().GetState().GetType() == StateType.kStateEdit) {
 			shapeEditor_.Draw(gl);
 		}
 	}

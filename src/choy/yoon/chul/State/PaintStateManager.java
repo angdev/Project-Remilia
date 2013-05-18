@@ -8,12 +8,6 @@ import choy.yoon.chul.Shape.ShapeEnumType;
 
 public class PaintStateManager {
 	
-	public enum StateType {
-		kStateInit,
-		kStateDraw,
-		kStateEdit,
-	}
-	
 	private static PaintStateManager instance_ = null;
 	private IState state_;
 	private InitState initState_;
@@ -67,6 +61,10 @@ public class PaintStateManager {
 		default:
 			return initState_;
 		}
+	}
+	
+	public IState GetState() {
+		return state_;
 	}
 	
 	public void OnDraw(MenuItem item) {

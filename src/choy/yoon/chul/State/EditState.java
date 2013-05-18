@@ -4,10 +4,11 @@ import android.view.MotionEvent;
 import choy.yoon.chul.Shape.DrawableShapeList;
 import choy.yoon.chul.Shape.Shape;
 import choy.yoon.chul.Shape.ShapeEditor;
-import choy.yoon.chul.State.PaintStateManager.StateType;
 
 public class EditState implements IState {
 
+	private static StateType type_ = StateType.kStateEdit;
+	
 	private Shape shape_;
 	private ShapeEditor shapeEditor_;
 
@@ -51,5 +52,10 @@ public class EditState implements IState {
 				shapeEditor_.Deselect();
 			}
 		}
+	}
+
+	@Override
+	public StateType GetType() {
+		return type_;
 	}
 }
