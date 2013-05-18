@@ -17,7 +17,7 @@ public class ShapePolyline extends Shape {
 	}
 	
 	public synchronized void AddVertex(float x, float y) {
-		if(vertices_.size() > 0 && vertices_.get(vertices_.size()-1).equals(GetNearVertex(x, y))) {
+		if(vertices_.size() > 0 && GetNearVertexIndex(x, y) == (vertices_.size() - 1)) {
 			endEditing();
 			return;
 		}
@@ -51,8 +51,9 @@ public class ShapePolyline extends Shape {
 		gl.glColor4f(color_[1], color_[2], color_[3], color_[0]);
 		GLESHelper.DrawOpenPolygon(gl, vertices_);
 		if(isEditing_) {
-			for(float[] v : vertices_) {
-				GLESHelper.DrawPoint(gl, v[0], v[1]);
+			int size = vertices_.size();
+			for(int i=0; i<size; ++i) {
+				GLESHelper.DrawPoint(gl, vertices_.get(i)[0], vertices_.get(i)[1]);
 			}
 			return;
 		}

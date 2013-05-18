@@ -58,8 +58,8 @@ public class ShapeEditor {
 	
 	public boolean Select(float x, float y) {
 		if(editType_ == EditEnumType.kEditFreeTransform) {
-			selectedVertex_ = shape_.GetNearVertex(x, y);
-			return (selectedVertex_ != null);
+			selectedVertexIndex_ = shape_.GetNearVertexIndex(x, y);
+			return (selectedVertexIndex_ != -1);
 		}
 		
 		oldTouchX_ = x;
@@ -69,7 +69,7 @@ public class ShapeEditor {
 			return shape_.IsSelected(x, y);
 		}
 		
-		selectedVertexIndex_ = bound_.GetVertices().indexOf(bound_.GetNearVertex(x, y));
+		selectedVertexIndex_ = bound_.GetNearVertexIndex(x, y);
 		if(selectedVertexIndex_ < 0) {
 			return false;
 		}
@@ -95,6 +95,8 @@ public class ShapeEditor {
 		case kEditTranslate:
 			editTranslate(x, y);
 			break;
+		default:
+			break;
 		}
 	}
 	
@@ -107,11 +109,10 @@ public class ShapeEditor {
 	}
 	
 	private void editFreeTransform(float touchX, float touchY) {
-		if(selectedVertex_ == null || !shape_.IsFreeTransformable()) {
+		if(selectedVertexIndex_ < 0 || !shape_.IsFreeTransformable()) {
 			return;
 		}
-		selectedVertex_[0] = touchX;
-		selectedVertex_[1] = touchY;
+		shape_.FreeTransform(selectedVertexIndex_, touchX, touchY);
 	}
 	
 	private void editScale(float touchX, float touchY) {
@@ -165,6 +166,8 @@ public class ShapeEditor {
 		case kEditScale:
 		case kEditTranslate:
 			bound_.Draw(gl);
+			break;
+		default:
 			break;
 		}
 	}

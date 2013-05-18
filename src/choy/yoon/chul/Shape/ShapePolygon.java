@@ -16,15 +16,23 @@ public class ShapePolygon extends Shape {
 	private boolean isEditing_;
 	//triangle list from vertices_.
 	private ArrayList<float[]> triangles_;
+	private boolean isDirty_;
 	
 	public ShapePolygon() {
 		super();
 		triangles_ = new ArrayList<float[]>();
 		isEditing_ = true;
+		isDirty_ = true;
+	}
+	
+	@Override
+	public void FreeTransform(int index, float x, float y) {
+		super.FreeTransform(index, x, y);
+		isDirty_ = true;
 	}
 	
 	public synchronized void AddVertex(float x, float y) {
-		if(vertices_.size() > 0 && vertices_.get(0).equals(GetNearVertex(x, y))) {
+		if(vertices_.size() > 0 && GetNearVertexIndex(x, y) == 0) {
 			endEditing();
 			return;
 		}
@@ -37,19 +45,29 @@ public class ShapePolygon extends Shape {
 	
 	private void endEditing() {
 		isEditing_ = false;
-		//정점 구성
-		MathHelper.Triangulate(vertices_, triangles_);
+	}
+	
+	private void triangulate() {
+		if(isDirty_) {
+			triangles_.clear();
+			MathHelper.Triangulate(vertices_, triangles_);
+			isDirty_ = false;
+		}
 	}
 
 	@Override
 	public void Draw(GL10 gl) {
 		if(isEditing_) {
 			GLESHelper.DrawOpenPolygon(gl, vertices_);
-			for(float[] v : vertices_) {
-				GLESHelper.DrawPoint(gl, v[0], v[1]);
+			int size = vertices_.size();
+			for(int i=0; i<size; ++i) {
+				GLESHelper.DrawPoint(gl, vertices_.get(i)[0], vertices_.get(i)[1]);
 			}
 			return;
 		}
+		
+		triangulate();
+		
 		BindTexture(gl);
 		gl.glEnableClientState(GL10.GL_VERTEX_ARRAY);
 		gl.glEnable(GL10.GL_TEXTURE_2D);

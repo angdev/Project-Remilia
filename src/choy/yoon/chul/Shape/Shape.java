@@ -47,6 +47,11 @@ public abstract class Shape {
 		gl.glDisableClientState(GL10.GL_TEXTURE_COORD_ARRAY);
 	}
 	
+	public void FreeTransform(int index, float x, float y) {
+		vertices_.get(index)[0] = x;
+		vertices_.get(index)[1] = y;
+	}
+	
 	public void Translate(float dx, float dy) {
 		MathHelper.TranslateVertices(vertices_, dx, dy);
 	}
@@ -59,7 +64,6 @@ public abstract class Shape {
 		MathHelper.ScaleVertices(vertices_, scaleX, scaleY, originX, originY);
 	}
 	
-	//점을 포함하는지 검사한다. 기본적으로는 닫힌 도형 베이스라 열린 도형의 경우에는 오버라이딩을 하자.
 	public boolean IsSelected(float x, float y) {
 		boolean including = false;
 		float xi, yi, xj, yj;
@@ -139,11 +143,12 @@ public abstract class Shape {
 		return r;
 	}
 	
-	public float[] GetNearVertex(float x, float y) {
+
+	public int GetNearVertexIndex(float x, float y) {
 		float vx, vy;
 		double minLength = Double.MAX_VALUE;
 		double length;
-		float[] vertex = null;
+		int index = -1;
 		for(int i=0; i<vertices_.size(); ++i) {
 			vx = vertices_.get(i)[0];
 			vy = vertices_.get(i)[1];
@@ -151,10 +156,10 @@ public abstract class Shape {
 			if(length < 5000.0f) {
 				if(length < minLength) {
 					minLength = length;
-					vertex = vertices_.get(i);
+					index = i;
 				}
 			}
 		}
-		return vertex;
+		return index;
 	}
 }
