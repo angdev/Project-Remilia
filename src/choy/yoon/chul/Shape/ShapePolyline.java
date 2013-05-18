@@ -34,7 +34,7 @@ public class ShapePolyline extends Shape {
 	
 	@Override
 	public boolean IsSelected(float x, float y) {
-		//Á÷¼±°Å¸®
+		//ì§ì„ ê±°ë¦¬
 		for(float[] v : vertices_) {
 			Log.d("", ""+((v[0] - x) * (v[0] - x) + (v[1] - y) * (v[1] - y)));
 			if((v[0] - x) * (v[0] - x) + (v[1] - y) * (v[1] - y) < 5000) {

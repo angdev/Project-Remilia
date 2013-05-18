@@ -30,7 +30,7 @@ public class ShapeBound extends Shape {
 	}
 	
 	private void flipX() {
-		//ºÎÀûÀıÇÒ ¶§´Â µÚÁıÀ¸¸é ¾ÈµÊ.
+		//ë¶€ì ì ˆí•  ë•ŒëŠ” ë’¤ì§‘ìœ¼ë©´ ì•ˆë¨.
 		if(vertices_.get(0)[0] < vertices_.get(2)[0]) {
 			return;
 		}

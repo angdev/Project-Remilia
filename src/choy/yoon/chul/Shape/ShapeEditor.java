@@ -13,7 +13,7 @@ public class ShapeEditor {
 	
 	private Shape shape_;
 	private EditEnumType editType_;
-	//°¡Áö°í ÀÖ´Â µµÇüÀÇ ¹Ù¿îµå
+	//ê°€ì§€ê³  ìˆëŠ” ë„í˜•ì˜ ë°”ìš´ë“œ
 	private ShapeBound bound_;
 	
 	//scale
@@ -153,7 +153,7 @@ public class ShapeEditor {
 		}
 		switch(editType_) {
 		case kEditFreeTransform:
-			//¾Æ ÀÌ°Å ±×¸®´Â°Å »©¾ßÇÏ´Âµ¥ ¤±¤¤¤·¤©
+			//ì•„ ì´ê±° ê·¸ë¦¬ëŠ”ê±° ë¹¼ì•¼í•˜ëŠ”ë° ã…ã„´ã…‡ã„¹
 			gl.glPushMatrix();
 			gl.glColor4f(0, 1, 0, 1);
 			ArrayList<float[]> vertices = shape_.GetVertices();

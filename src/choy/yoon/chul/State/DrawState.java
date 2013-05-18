@@ -168,7 +168,7 @@ public class DrawState implements IState {
 		default:
 			break;
 		}
-		//¸®½ºÆ®¿¡ Ãß°¡
+		//ë¦¬ìŠ¤íŠ¸ì— ì¶”ê°€
 		DrawableShapeList.getInstance().AddShape(currentShape_);	
 	}
 }

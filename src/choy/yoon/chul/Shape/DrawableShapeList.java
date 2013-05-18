@@ -13,7 +13,7 @@ public class DrawableShapeList {
 		shapes_ = new ArrayList<Shape>();
 	}
 
-	//±ÍÂúÀ¸´Ï ÀÏ´Ü ÀÌ Á¤µµ·Î ½Ì±ÛÅÏ ±¸Çö.
+	//ê·€ì°®ìœ¼ë‹ˆ ì¼ë‹¨ ì´ ì •ë„ë¡œ ì‹±ê¸€í„´ êµ¬í˜„.
 	public static synchronized DrawableShapeList getInstance() {
 		if(instance_ == null) {
 			instance_ = new DrawableShapeList();
@@ -34,7 +34,7 @@ public class DrawableShapeList {
 	}
 
 	public Shape PickShape(float x, float y) {
-		//ÃÖ±Ù°ÅºÎÅÍ Ã£´Â´Ù -> ¿ª¼ø Å½»ö
+		//ìµœê·¼ê±°ë¶€í„° ì°¾ëŠ”ë‹¤ -> ì—­ìˆœ íƒìƒ‰
 		for(int i=shapes_.size()-1; i>=0; --i) {
 			if(shapes_.get(i).IsSelected(x, y)) {
 				return shapes_.get(i);

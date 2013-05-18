@@ -26,15 +26,15 @@ public class ShapeLine extends Shape {
 	
 	@Override
 	public boolean IsSelected(float x, float y) {
-		//Á÷¼±°Å¸®
+		//ì§ì„ ê±°ë¦¬
 		float x1 = vertices_.get(0)[0];
 		float y1 = vertices_.get(0)[1];
 		float x2 = vertices_.get(1)[0];
 		float y2 = vertices_.get(1)[1];
 		
-		//±â¿ï±â ±¸ÇÏ±â¿¡´Â ³Ê¹« Á¼Àº x °£°İ
+		//ê¸°ìš¸ê¸° êµ¬í•˜ê¸°ì—ëŠ” ë„ˆë¬´ ì¢ì€ x ê°„ê²©
 		if(Math.abs(x2 - y1) < 0.001f) {
-			//y°ª »çÀÌ¿¡ ÀÖ´ÂÁö °Ë»ç
+			//yê°’ ì‚¬ì´ì— ìˆëŠ”ì§€ ê²€ì‚¬
 			return ((y1 > y) != (y2 > y));
 		}
 		

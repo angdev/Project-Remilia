@@ -4,9 +4,9 @@ package choy.yoon.chul.Shape;
 public class ShapeEllipse extends Shape {
 	
 	private static ShapeEnumType type_ = ShapeEnumType.kShapeEllipse;
-	//TODO: »ı¼º ÀÌÈÄ ÇÊ¿ä¾ø¾îÁö´Â ¹®Á¦.
+	//TODO: ìƒì„± ì´í›„ í•„ìš”ì—†ì–´ì§€ëŠ” ë¬¸ì œ.
 	private float[] center_;
-	//ÀåÃà, ´ÜÃà
+	//ì¥ì¶•, ë‹¨ì¶•
 	private float majorAxis_, minorAxis_;
 
 	public ShapeEllipse() {

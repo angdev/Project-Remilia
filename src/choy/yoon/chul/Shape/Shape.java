@@ -12,7 +12,7 @@ import choy.yoon.chul.MathHelper;
 
 public abstract class Shape {
 	
-	//float[][3] Çü½ÄÀ» ÁöÅ³ °Í.
+	//float[][3] í˜•ì‹ì„ ì§€í‚¬ ê²ƒ.
 	protected ArrayList<float[]> vertices_;
 	protected ArrayList<float[]> uvs_;
 	protected int[] texPtr_;
@@ -117,7 +117,7 @@ public abstract class Shape {
 		}
 	}
 	
-	//±âº»ÀûÀÎ rect ±¸ÇÏ´Â ¹æ¹ı
+	//ê¸°ë³¸ì ì¸ rect êµ¬í•˜ëŠ” ë°©ë²•
 	public Rect GetRect() {
 		float left = Float.MAX_VALUE, right = Float.MIN_VALUE,
 				top = Float.MAX_VALUE, bottom = Float.MIN_VALUE;
