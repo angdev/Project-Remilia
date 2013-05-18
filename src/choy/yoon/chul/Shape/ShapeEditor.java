@@ -51,6 +51,9 @@ public class ShapeEditor {
 			return;
 		}
 		editType_ = type;
+		if(shape_ != null) {
+			bound_.SetBound(shape_.GetRect());
+		}
 	}
 	
 	public boolean Select(float x, float y) {
