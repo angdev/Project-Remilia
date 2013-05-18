@@ -19,7 +19,6 @@ import choy.yoon.chul.State.PaintStateManager.StateType;
 public class MainActivity extends Activity implements
 		ColorPickerDialog.OnColorChangedListener {
 	private int selectedColor;
-	private Bitmap selectedTexture;
 	private PaintView paintView;
 
 	private static final int ACTIVITY_SELECT_IMAGE = 1000;
@@ -30,9 +29,6 @@ public class MainActivity extends Activity implements
 		PaintStateManager.GetInstance().SetContext(this);
 		paintView = new PaintView(this);
 		setContentView(paintView);
-
-		selectedTexture = BitmapFactory.decodeResource(getResources(),
-				R.drawable.sample);
 	}
 
 	@Override
@@ -112,7 +108,6 @@ public class MainActivity extends Activity implements
 	}
 
 	public void textureChanged(Bitmap texture) {
-		selectedTexture = texture;
 		EditState state = (EditState)PaintStateManager.GetInstance().GetState(StateType.kStateEdit);
 		if(state.GetShape() != null) {
 			state.GetShape().SetTexture(texture);
