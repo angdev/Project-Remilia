@@ -27,7 +27,7 @@ public class ShapeEditor {
 	private float oldTouchY_;
 	
 	public ShapeEditor() {
-		editType_ = EditEnumType.kEditFreeTransform;
+		editType_ = EditEnumType.kEditScale;
 		selectedVertexOld_ = new float[3];
 		bound_ = new ShapeBound();
 	}
