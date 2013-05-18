@@ -68,17 +68,21 @@ public class ShapePolygon extends Shape {
 		
 		triangulate();
 		
-		BindTexture(gl);
+		if(bitmap_ != null) {
+			BindTexture(gl);
+			gl.glEnable(GL10.GL_TEXTURE_2D);
+			gl.glEnableClientState(GL10.GL_TEXTURE_COORD_ARRAY);
+			gl.glTexCoordPointer(2, GL10.GL_FLOAT, 0, GLESHelper.UVArrayToBuffer(uvs_.toArray(new float[][]{})));
+		}
 		gl.glEnableClientState(GL10.GL_VERTEX_ARRAY);
-		gl.glEnable(GL10.GL_TEXTURE_2D);
-		gl.glEnableClientState(GL10.GL_TEXTURE_COORD_ARRAY);
-		gl.glTexCoordPointer(2, GL10.GL_FLOAT, 0, GLESHelper.UVArrayToBuffer(uvs_.toArray(new float[][]{})));
 		gl.glColor4f(color_[1], color_[2], color_[3], color_[0]);
 		gl.glVertexPointer(3, GL10.GL_FLOAT, 0, GLESHelper.ArrayToBuffer(triangles_.toArray(new float[][]{})));
 		gl.glDrawArrays(GL10.GL_TRIANGLES, 0, triangles_.size());
 		gl.glDisableClientState(GL10.GL_VERTEX_ARRAY);
-		gl.glDisable(GL10.GL_TEXTURE_2D);
-		gl.glDisableClientState(GL10.GL_TEXTURE_COORD_ARRAY);
+		if(bitmap_ != null) {
+			gl.glDisable(GL10.GL_TEXTURE_2D);
+			gl.glDisableClientState(GL10.GL_TEXTURE_COORD_ARRAY);
+		}
 	}
 	
 	@Override
