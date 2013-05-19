@@ -14,10 +14,11 @@
     <string name="menu_edit_scale">Scale</string>
     <string name="menu_edit_rotate">Rotate</string>
     <string name="menu_edit_translate">Translate</string>
+    <string name="menu_edit_stroke">Stroke</string>
     <string name="menu_edit_delete">Delete</string>
     <string name="menu_fill">Fill</string>
     <string name="menu_fill_color">Color</string>
     <string name="menu_fill_texture">Texture</string>
     
-
+	<string name="default_stroke">1</string>
 </resources>
