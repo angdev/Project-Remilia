@@ -130,6 +130,7 @@ public class MainActivity extends Activity implements
 		}
 	}
 
+	//ColorPickerDialog에서 색을 선택하면 이 함수로 반환이 된다 (콜백)
 	@Override
 	public void colorChanged(int color) {
 		selectedColor = color;
@@ -144,6 +145,7 @@ public class MainActivity extends Activity implements
 		super.onActivityResult(requestCode, resultCode, data);
 
 		switch (requestCode) {
+		//텍스쳐를 갤러리로부터 선택한다.
 		case ACTIVITY_SELECT_IMAGE:
 			if (resultCode == RESULT_OK) {
 				try {
@@ -168,6 +170,7 @@ public class MainActivity extends Activity implements
 		}
 	}
 	
+	//stroke가 선택되면 이 함수로 반환되고, 도형의 stroke를 변경한다.
 	public void strokeChanged(int stroke) {
 		EditState state = (EditState) PaintStateManager.GetInstance().GetState(
 				StateType.kStateEdit);
@@ -176,6 +179,7 @@ public class MainActivity extends Activity implements
 		}
 	}
 
+	//텍스쳐가 선택되면 이 함수로 반환되고, 도형에 텍스쳐를 입힌다.
 	public void textureChanged(Bitmap texture) {
 		EditState state = (EditState) PaintStateManager.GetInstance().GetState(
 				StateType.kStateEdit);

@@ -33,6 +33,7 @@ public class EditState implements IState {
 		return shape_;
 	}
 
+	//도형이 선택되면 적절히 터치 입력에 따라 ShapeEditor에서 처리한다.
 	@Override
 	public void onTouch(MotionEvent event) {
 		// TODO Auto-generated method stub

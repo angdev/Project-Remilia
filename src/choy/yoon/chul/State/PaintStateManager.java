@@ -6,6 +6,7 @@ import android.view.MotionEvent;
 import choy.yoon.chul.R;
 import choy.yoon.chul.Shape.ShapeEnumType;
 
+//여기서 그림판의 상태를 관리한다.
 public class PaintStateManager {
 	
 	private static PaintStateManager instance_ = null;

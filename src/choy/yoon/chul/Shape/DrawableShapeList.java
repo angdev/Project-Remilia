@@ -46,6 +46,7 @@ public class DrawableShapeList {
 		return null;
 	}
 
+	//렌더러는 이 함수를 호출하여 도형들을 그림. (뷰 역할)
 	public void DrawShapes(GL10 gl) {
 		for(Shape shape : shapes_) {
 			shape.Draw(gl);

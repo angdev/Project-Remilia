@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 public class MathHelper {
 
+	//정점을 이동시킴
 	public static void TranslateVertices(ArrayList<float[]> vertices, 
 			float translateX, float translateY) {
 		for(float[] v : vertices) {
@@ -13,6 +14,7 @@ public class MathHelper {
 		}
 	}
 
+	//정점 크기 변경
 	public static void ScaleVertices(ArrayList<float[]> vertices,
 			float scaleX, float scaleY) {
 		for(float[] v : vertices) {
@@ -21,6 +23,7 @@ public class MathHelper {
 		}
 	}
 
+	//정점을 기준 점으로부터 크기 변경(?)
 	public static void ScaleVertices(ArrayList<float[]> vertices, float scaleX, float scaleY, float originX, float originY) {
 		for(float[] v : vertices) {
 			v[0] = (v[0] - originX) * scaleX + originX;
@@ -28,6 +31,7 @@ public class MathHelper {
 		}
 	}
 
+	//정점 회전 변환
 	public static void RotateVertices(ArrayList<float[]> vertices, 
 			float radian) {
 		for(float[] v : vertices) {
@@ -40,6 +44,7 @@ public class MathHelper {
 		}
 	}
 
+	//정점을 한 점을 기준으로 회전 시킴.
 	public static void RotateVertices(ArrayList<float[]> vertices, float radian, float originX, float originY) {
 		for(float[] v : vertices) {
 			BigDecimal x = new BigDecimal((v[0] - originX) * Math.cos(radian) - (v[1] - originY) * Math.sin(radian) + originX);
@@ -50,6 +55,7 @@ public class MathHelper {
 	}
 
 	
+	//귀 자르기 삼각화 알고리즘
 	// http://www.flipcode.com/archives/Efficient_Polygon_Triangulation.shtml
 	//get polygon area (inner product)
 	public static float GetArea(ArrayList<float[]> vertices) {
@@ -113,7 +119,6 @@ public class MathHelper {
 	//input -> vertex list (triangle_fans)
 	//output -> vertex list (triangles)
 	public static boolean Triangulate(ArrayList<float[]> vertices, ArrayList<float[]> result) {
-		/* allocate and initialize list of Vertices in polygon */
 
 		int n = vertices.size();
 		if ( n < 3 ) return false;

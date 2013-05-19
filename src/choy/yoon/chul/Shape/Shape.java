@@ -10,6 +10,7 @@ import android.opengl.GLUtils;
 import choy.yoon.chul.GLESHelper;
 import choy.yoon.chul.MathHelper;
 
+//도형 기반 클래스
 public abstract class Shape {
 	
 	//float[][3] 형식을 지킬 것.
@@ -18,6 +19,7 @@ public abstract class Shape {
 	protected int[] texPtr_;
 	protected boolean texBinded_;
 	protected Bitmap bitmap_;
+	//argb 순으로 저장 (0.0 - 1.0)
 	protected float[] color_;
 	protected float stroke_;
 	
@@ -31,11 +33,14 @@ public abstract class Shape {
 		stroke_ = 1.0f;
 	}
 	
+	//자바는 RTTI 지원이 적절하지만 그 사실을 잊고 enum을 이용함.
 	abstract public ShapeEnumType GetType();
+	//아래의 메소드로 편집 가능한 스코프를 표시함.
 	abstract public boolean IsFreeTransformable();
 	abstract public boolean IsScalable();
 	abstract public boolean IsRotatable();
 	
+	//공통적으로 사용될 수 있는 그리기 함수
 	public void Draw(GL10 gl) {
 		gl.glPushMatrix();
 		if(bitmap_ != null) {
@@ -57,6 +62,7 @@ public abstract class Shape {
 		gl.glPopMatrix();
 	}
 	
+	//변환은 MathHelper 클래스 참조.
 	public void FreeTransform(int index, float x, float y) {
 		vertices_.get(index)[0] = x;
 		vertices_.get(index)[1] = y;
@@ -74,6 +80,7 @@ public abstract class Shape {
 		MathHelper.ScaleVertices(vertices_, scaleX, scaleY, originX, originY);
 	}
 	
+	//도형이 선택되었는가를 판단하는 함수. 기본적으로는 다각형이라고 가정하고 점이 내부에 포함되는지 검사.
 	public boolean IsSelected(float x, float y) {
 		boolean including = false;
 		float xi, yi, xj, yj;
@@ -109,6 +116,8 @@ public abstract class Shape {
 		return stroke_;
 	}
 	
+	//비트맵을 받아서 텍스쳐를 설정함.
+	//도형의 경계가 되는 사각형을 구해서 그 사각형에 텍스쳐를 입히듯이 uv 좌표를 계산한다.
 	public void SetTexture(Bitmap bitmap) {
 		Rect r = GetRect();
 		int width = r.right - r.left;
@@ -123,6 +132,7 @@ public abstract class Shape {
 	    texBinded_ = true;
 	}
 	
+	//설정된 텍스쳐를 바인딩함.
 	public void BindTexture(GL10 gl) {
 		if(texBinded_ == true) {
 			gl.glGenTextures(1, texPtr_, 0);
@@ -136,6 +146,7 @@ public abstract class Shape {
 	}
 	
 	//기본적인 rect 구하는 방법
+	//경계 부분의 rect를 반환.
 	public Rect GetRect() {
 		float left = Float.MAX_VALUE, right = Float.MIN_VALUE,
 				top = Float.MAX_VALUE, bottom = Float.MIN_VALUE;
@@ -161,7 +172,7 @@ public abstract class Shape {
 		return r;
 	}
 	
-
+	//(x, y)에 가까운 정점을 반환함.
 	public int GetNearVertexIndex(float x, float y) {
 		float vx, vy;
 		double minLength = Double.MAX_VALUE;

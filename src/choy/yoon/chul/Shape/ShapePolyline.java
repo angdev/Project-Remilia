@@ -16,6 +16,7 @@ public class ShapePolyline extends Shape {
 		isEditing_ = true;
 	}
 	
+	//마지막 위치를 선택하면 그리기 종료.
 	public synchronized void AddVertex(float x, float y) {
 		if(vertices_.size() > 0 && GetNearVertexIndex(x, y) == (vertices_.size() - 1)) {
 			endEditing();

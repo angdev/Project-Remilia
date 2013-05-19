@@ -1,6 +1,6 @@
 package choy.yoon.chul.Shape;
 
-
+//타원
 public class ShapeEllipse extends Shape {
 	
 	private static ShapeEnumType type_ = ShapeEnumType.kShapeEllipse;

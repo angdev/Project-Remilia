@@ -4,6 +4,7 @@ import javax.microedition.khronos.opengles.GL10;
 
 import choy.yoon.chul.GLESHelper;
 
+//선분
 public class ShapeLine extends Shape {
 
 	private static ShapeEnumType type_ = ShapeEnumType.kShapeLine;
@@ -24,6 +25,7 @@ public class ShapeLine extends Shape {
 		vertices_.get(1)[1] = y;
 	}
 	
+	//점과 선분의 거리를 직선거리 공식을 이용하여 구한다.
 	@Override
 	public boolean IsSelected(float x, float y) {
 		//직선거리

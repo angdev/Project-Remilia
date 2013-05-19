@@ -13,9 +13,11 @@ import choy.yoon.chul.MathHelper;
 public class ShapePolygon extends Shape {
 	
 	private static ShapeEnumType type_ = ShapeEnumType.kShapePolygon;
+	//맨 처음에 생성할 때, 그려지고 있는 상태를 표시
 	private boolean isEditing_;
 	//triangle list from vertices_.
 	private ArrayList<float[]> triangles_;
+	//구성하고 있는 정점이 수정되었는가 (삼각화를 통한 그리기 정점 갱신을 위해서)
 	private boolean isDirty_;
 	
 	public ShapePolygon() {
@@ -30,7 +32,8 @@ public class ShapePolygon extends Shape {
 		super.FreeTransform(index, x, y);
 		isDirty_ = true;
 	}
-	
+
+	//처음 위치를 선택하면 종료.
 	public synchronized void AddVertex(float x, float y) {
 		if(vertices_.size() > 0 && GetNearVertexIndex(x, y) == 0) {
 			endEditing();
@@ -47,7 +50,10 @@ public class ShapePolygon extends Shape {
 		isEditing_ = false;
 	}
 	
+	//오목다각형을 위한 삼각화
 	private void triangulate() {
+		//정점이 변경되었을 때만 새로 삼각화한다.
+		//gl 스레드만이 이 함수에 접근할 수 있다.
 		if(isDirty_) {
 			triangles_.clear();
 			MathHelper.Triangulate(vertices_, triangles_);
@@ -57,6 +63,7 @@ public class ShapePolygon extends Shape {
 
 	@Override
 	public void Draw(GL10 gl) {
+		//그리는 도중일 떄는 선분만 보여준다.
 		if(isEditing_) {
 			GLESHelper.DrawOpenPolygon(gl, vertices_);
 			int size = vertices_.size();

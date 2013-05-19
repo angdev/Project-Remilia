@@ -4,6 +4,7 @@ import javax.microedition.khronos.opengles.GL10;
 
 import choy.yoon.chul.GLESHelper;
 
+//점
 public class ShapeDot extends Shape {
 	
 	private static ShapeEnumType type_ = ShapeEnumType.kShapeDot;
@@ -18,6 +19,7 @@ public class ShapeDot extends Shape {
 		vertices_.get(0)[1] = y;
 	}
 	
+	//점은 (x, y)와의 거리를 계산하여 선택되었는가 아닌가를 결정.
 	@Override
 	public boolean IsSelected(float x, float y) {
 		float x_ = vertices_.get(0)[0];

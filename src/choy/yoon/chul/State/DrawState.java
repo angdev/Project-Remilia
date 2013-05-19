@@ -22,6 +22,7 @@ public class DrawState implements IState {
 		startPoint_ = new float[]{0, 0, 0};
 	}
 
+	//그리기 상태에서 터치 입력이 들어오면 현재 무슨 도형을 그릴 건지에 따라 알아서 분기된다.
 	@Override
 	public void onTouch(MotionEvent event) {
 		if(currentShape_ == null) {

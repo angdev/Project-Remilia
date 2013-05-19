@@ -10,6 +10,7 @@ public class ShapeBound extends Shape {
 	
 	private static ShapeEnumType type_ = ShapeEnumType.kShapeBound;
 	
+	//도형의 경계를 나타내는 객체.
 	//0 -> lt, 1 -> lb, 2 -> rb, 3 -> rt
 	public ShapeBound() {
 		super();

@@ -9,6 +9,7 @@ import choy.yoon.chul.State.EditEnumType;
 import choy.yoon.chul.State.PaintStateManager;
 import choy.yoon.chul.State.StateType;
 
+//도형의 편집을 담당하는 클래스
 public class ShapeEditor {
 	
 	private Shape shape_;
@@ -56,6 +57,7 @@ public class ShapeEditor {
 		}
 	}
 	
+	//ACTION_DOWN
 	public boolean Select(float x, float y) {
 		if(editType_ == EditEnumType.kEditFreeTransform) {
 			selectedVertexIndex_ = shape_.GetNearVertexIndex(x, y);
@@ -81,6 +83,7 @@ public class ShapeEditor {
 		return (selectedVertex_ != null);
 	}
 	
+	//ACTION_MOVE
 	public void Move(float x, float y) {
 		switch(editType_) {
 		case kEditFreeTransform:
@@ -100,6 +103,7 @@ public class ShapeEditor {
 		}
 	}
 	
+	//ACTION_UP
 	public void Deselect() {
 		selectedVertex_ = null;
 		selectedVertexOld_[0] = 0;
@@ -108,6 +112,7 @@ public class ShapeEditor {
 		selectedVertexCounter_ = null;
 	}
 	
+	//자유 변형
 	private void editFreeTransform(float touchX, float touchY) {
 		if(selectedVertexIndex_ < 0 || !shape_.IsFreeTransformable()) {
 			return;
@@ -115,6 +120,7 @@ public class ShapeEditor {
 		shape_.FreeTransform(selectedVertexIndex_, touchX, touchY);
 	}
 	
+	//크기 조절 (bound를 이용)
 	private void editScale(float touchX, float touchY) {
 		if(selectedVertex_ == null || !shape_.IsScalable()) {
 			return;
@@ -127,6 +133,7 @@ public class ShapeEditor {
 		selectedVertexOld_[1] = selectedVertex_[1];
 	}
 	
+	//회전 각차를 구해서 회전
 	private void editRotate(float touchX, float touchY) {
 		if(selectedVertex_ == null || !shape_.IsRotatable()) {
 			return;
