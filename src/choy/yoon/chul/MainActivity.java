@@ -169,6 +169,11 @@ public class MainActivity extends Activity implements
 	}
 	
 	public void strokeChanged(int stroke) {
+		EditState state = (EditState) PaintStateManager.GetInstance().GetState(
+				StateType.kStateEdit);
+		if(state.GetShape() != null) {
+			state.GetShape().SetStroke(stroke);
+		}
 	}
 
 	public void textureChanged(Bitmap texture) {

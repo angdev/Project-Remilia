@@ -95,7 +95,6 @@ public class GLESHelper {
 		}
 
 		gl.glEnableClientState(GL10.GL_VERTEX_ARRAY);
-		gl.glLineWidthx(1);
 		gl.glVertexPointer(3, GL10.GL_FLOAT, 0,
 				ArrayToBuffer(points.toArray(new float[][]{})));
 		gl.glDrawArrays(GL10.GL_LINES, 0, vertices.size() * 2 - 2);

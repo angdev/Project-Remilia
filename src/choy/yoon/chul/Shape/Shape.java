@@ -7,7 +7,6 @@ import javax.microedition.khronos.opengles.GL10;
 import android.graphics.Bitmap;
 import android.graphics.Rect;
 import android.opengl.GLUtils;
-import android.util.Log;
 import choy.yoon.chul.GLESHelper;
 import choy.yoon.chul.MathHelper;
 
@@ -20,6 +19,7 @@ public abstract class Shape {
 	protected boolean texBinded_;
 	protected Bitmap bitmap_;
 	protected float[] color_;
+	protected float stroke_;
 	
 	public Shape() {
 		vertices_ = new ArrayList<float[]>();
@@ -28,6 +28,7 @@ public abstract class Shape {
 		texPtr_ = new int[1];
 		texBinded_ = false;
 		bitmap_ = null;
+		stroke_ = 1.0f;
 	}
 	
 	abstract public ShapeEnumType GetType();
@@ -36,6 +37,7 @@ public abstract class Shape {
 	abstract public boolean IsRotatable();
 	
 	public void Draw(GL10 gl) {
+		gl.glPushMatrix();
 		if(bitmap_ != null) {
 			BindTexture(gl);
 			gl.glEnable(GL10.GL_TEXTURE_2D);
@@ -43,6 +45,7 @@ public abstract class Shape {
 			gl.glTexCoordPointer(2, GL10.GL_FLOAT, 0, GLESHelper.UVArrayToBuffer(uvs_.toArray(new float[][]{})));
 		}
 		gl.glEnableClientState(GL10.GL_VERTEX_ARRAY);
+		gl.glLineWidth(stroke_);
 		gl.glColor4f(color_[1], color_[2], color_[3], color_[0]);
 		gl.glVertexPointer(3, GL10.GL_FLOAT, 0, GLESHelper.ArrayToBuffer(vertices_.toArray(new float[][]{})));
 		gl.glDrawArrays(GL10.GL_TRIANGLE_FAN, 0, vertices_.size());
@@ -51,6 +54,7 @@ public abstract class Shape {
 			gl.glDisable(GL10.GL_TEXTURE_2D);
 			gl.glDisableClientState(GL10.GL_TEXTURE_COORD_ARRAY);
 		}
+		gl.glPopMatrix();
 	}
 	
 	public void FreeTransform(int index, float x, float y) {
@@ -95,6 +99,14 @@ public abstract class Shape {
 	
 	public float[] GetColor() {
 		return color_;
+	}
+	
+	public void SetStroke(float stroke) {
+		stroke_ = stroke;
+	}
+	
+	public float GetStroke() {
+		return stroke_;
 	}
 	
 	public void SetTexture(Bitmap bitmap) {

@@ -45,12 +45,14 @@ public class ShapeLine extends Shape {
 	
 	@Override
 	public void Draw(GL10 gl) {
+		gl.glPushMatrix();
 		gl.glEnableClientState(GL10.GL_VERTEX_ARRAY);
-		gl.glLineWidth(5);
+		gl.glLineWidth(stroke_);
 		gl.glColor4f(color_[1], color_[2], color_[3], color_[0]);
 		gl.glVertexPointer(3, GL10.GL_FLOAT, 0, GLESHelper.ArrayToBuffer(vertices_.toArray(new float[][]{})));
 		gl.glDrawArrays(GL10.GL_LINES, 0, 2);
 		gl.glDisableClientState(GL10.GL_VERTEX_ARRAY);
+		gl.glPopMatrix();
 	}
 	
 	@Override
