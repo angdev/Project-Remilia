@@ -21,6 +21,7 @@ public class InitState implements IState {
 			EditState state = (EditState) PaintStateManager.GetInstance().GetState(StateType.kStateEdit);
 			state.SetShape(shape);
 			PaintStateManager.GetInstance().SetState(StateType.kStateEdit);
+			PaintStateManager.GetInstance().GetState().onTouch(event);
 		}
 	}
 

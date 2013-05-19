@@ -7,6 +7,7 @@ import javax.microedition.khronos.opengles.GL10;
 import android.graphics.Bitmap;
 import android.graphics.Rect;
 import android.opengl.GLUtils;
+import android.util.Log;
 import choy.yoon.chul.GLESHelper;
 import choy.yoon.chul.MathHelper;
 

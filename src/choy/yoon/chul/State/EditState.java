@@ -42,7 +42,6 @@ public class EditState implements IState {
 				if(!shapeEditor_.Select(event.getX(), event.getY())) {
 					shapeEditor_.SetShape(null);
 					PaintStateManager.GetInstance().SetState(StateType.kStateInit);
-					PaintStateManager.GetInstance().GetState(StateType.kStateInit).onTouch(event);
 				}
 				break;
 			case MotionEvent.ACTION_MOVE:
@@ -50,6 +49,7 @@ public class EditState implements IState {
 				break;
 			case MotionEvent.ACTION_UP:
 				shapeEditor_.Deselect();
+				break;
 			}
 		}
 	}
