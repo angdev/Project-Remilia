@@ -2,6 +2,7 @@ package choy.yoon.chul;
 
 import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.opengles.GL10;
+import javax.microedition.khronos.opengles.GL11;
 
 import android.opengl.GLSurfaceView.Renderer;
 import choy.yoon.chul.Shape.DrawableShapeList;
@@ -41,6 +42,7 @@ public class PaintRenderer implements Renderer {
 		gl.glDepthFunc(GL10.GL_LEQUAL);
 		gl.glHint(GL10.GL_PERSPECTIVE_CORRECTION_HINT, GL10.GL_NICEST); 
 	    DrawableShapeList.getInstance().RebindTexture();
+
 	}
 
 }
