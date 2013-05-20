@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import javax.microedition.khronos.opengles.GL10;
 
 import android.graphics.Bitmap;
+import android.graphics.Bitmap.Config;
 import android.graphics.Rect;
 import android.opengl.GLUtils;
 import choy.yoon.chul.GLESHelper;
@@ -47,6 +48,7 @@ public abstract class Shape {
 			BindTexture(gl);
 			gl.glEnable(GL10.GL_TEXTURE_2D);
 			gl.glEnableClientState(GL10.GL_TEXTURE_COORD_ARRAY);
+			gl.glBindTexture(GL10.GL_TEXTURE_2D, texPtr_[0]);
 			gl.glTexCoordPointer(2, GL10.GL_FLOAT, 0, GLESHelper.UVArrayToBuffer(uvs_.toArray(new float[][]{})));
 		}
 		gl.glEnableClientState(GL10.GL_VERTEX_ARRAY);
@@ -128,7 +130,7 @@ public abstract class Shape {
 				(vertices_.get(i)[1] - r.top)/height
 			});
 		}
-		bitmap_ = bitmap;
+		bitmap_ = bitmap.copy(Config.ARGB_8888, true);
 	    texBinded_ = true;
 	}
 	
@@ -140,8 +142,15 @@ public abstract class Shape {
 			gl.glTexParameterf(GL10.GL_TEXTURE_2D, GL10.GL_TEXTURE_MAG_FILTER, GL10.GL_LINEAR);
 			gl.glTexParameterf(GL10.GL_TEXTURE_2D, GL10.GL_TEXTURE_MIN_FILTER, GL10.GL_NEAREST);
 			GLUtils.texImage2D(GL10.GL_TEXTURE_2D, 0, bitmap_, 0);
-			bitmap_.recycle();
+			//bitmap_.recycle();
 			texBinded_ = false;
+		}
+	}
+	
+	//텍스쳐 날아갔을 경우 다시 바인딩.
+	public void RebindTexture() {
+		if(bitmap_ != null) {
+			texBinded_ = true;
 		}
 	}
 	

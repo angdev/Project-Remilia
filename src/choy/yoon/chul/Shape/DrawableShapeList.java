@@ -35,6 +35,13 @@ public class DrawableShapeList {
 	public void SetShapeEditor(ShapeEditor shapeEditor) {
 		shapeEditor_ = shapeEditor;
 	}
+	
+	public void RebindTexture() {
+		int size = shapes_.size();
+		for(int i=0; i<size; ++i) {
+			shapes_.get(i).RebindTexture();
+		}
+	}
 
 	public Shape PickShape(float x, float y) {
 		//최근거부터 찾는다 -> 역순 탐색
@@ -48,8 +55,9 @@ public class DrawableShapeList {
 
 	//렌더러는 이 함수를 호출하여 도형들을 그림. (뷰 역할)
 	public void DrawShapes(GL10 gl) {
-		for(Shape shape : shapes_) {
-			shape.Draw(gl);
+		int size = shapes_.size();
+		for(int i=0; i<size; ++i) {
+			shapes_.get(i).Draw(gl);
 		}
 		if(shapeEditor_ != null && PaintStateManager.GetInstance().GetState().GetType() == StateType.kStateEdit) {
 			shapeEditor_.Draw(gl);
