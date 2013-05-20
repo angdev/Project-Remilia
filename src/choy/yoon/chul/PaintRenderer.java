@@ -2,7 +2,6 @@ package choy.yoon.chul;
 
 import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.opengles.GL10;
-import javax.microedition.khronos.opengles.GL11;
 
 import android.opengl.GLSurfaceView.Renderer;
 import choy.yoon.chul.Shape.DrawableShapeList;
