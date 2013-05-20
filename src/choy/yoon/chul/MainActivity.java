@@ -11,7 +11,6 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -85,7 +84,7 @@ public class MainActivity extends Activity implements
 						public void onClick(DialogInterface dialog, int id) {
 							progress = seekbar.getProgress();
 							
-							strokeChanged((int)((400.0 / 9702.0) * java.lang.Math.pow(progress, 2.0) + (9302.0 / 9702.0) * progress + 1));
+							strokeChanged(progress);
 						}
 					});
 			builder.setNegativeButton("Cancel", null);
@@ -105,7 +104,7 @@ public class MainActivity extends Activity implements
 				@Override
 				public void onProgressChanged(SeekBar seekBar, int progress,
 						boolean fromUser) {
-					indicator.setText(Integer.toString((int)((400.0 / 9702.0) * java.lang.Math.pow(progress, 2.0) + (9302.0 / 9702.0) * progress + 1)));
+					indicator.setText(Integer.toString(progress));
 				}
 			});
 		default:
