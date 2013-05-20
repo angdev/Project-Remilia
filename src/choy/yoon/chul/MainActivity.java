@@ -85,8 +85,7 @@ public class MainActivity extends Activity implements
 						public void onClick(DialogInterface dialog, int id) {
 							progress = seekbar.getProgress();
 							
-							double a = 499 / (java.lang.Math.exp(100.0) - 1);
-							strokeChanged((int)((a) * (java.lang.Math.exp(seekbar.getProgress())) + (1 - a)));
+							strokeChanged((int)((400.0 / 9702.0) * java.lang.Math.pow(progress, 2.0) + (9302.0 / 9702.0) * progress + 1));
 						}
 					});
 			builder.setNegativeButton("Cancel", null);
@@ -106,8 +105,7 @@ public class MainActivity extends Activity implements
 				@Override
 				public void onProgressChanged(SeekBar seekBar, int progress,
 						boolean fromUser) {
-					double a = 499 / (java.lang.Math.exp(100.0) - 1);
-					indicator.setText(Integer.toString((int)((a) * (java.lang.Math.exp(progress)) + (1 - a))));
+					indicator.setText(Integer.toString((int)((400.0 / 9702.0) * java.lang.Math.pow(progress, 2.0) + (9302.0 / 9702.0) * progress + 1)));
 				}
 			});
 		default:
